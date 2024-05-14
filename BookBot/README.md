@@ -1,3 +1,3 @@
 # BookBot
 
-BookBot is a command-line interface project!
+BookBot is my first project. This is a command-line interface project!
