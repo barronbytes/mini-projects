@@ -26,3 +26,7 @@ The bullet points below will outline specific areas for improvement. These enhan
 - **API Integrations:** Using tools such as **Google Books API** would provide the ability to fetch a vast library of book content and metadeta directly, elmininating manual uploads and enhancing efficiency. The **AWS S3 API** can also be used to provide scalable, secure storage for book files, improving file management and retrieval.
 - **Security:** The current process for using BookBot involves two manual steps: adding a **.txt** file to the books folder and entering the file path in the **'main.py'** file. Introducing a front-end component to BookBot would offer users added features like content uploading, but it would also introduce new security concerns to manage.
 - **Data:** Using of a database would offer key benefits to the product. It would ensure structured data storage, maintaining integrity and consistency. Additionally, this would support complex querying for efficient data retrieval and analysis.
+
+## Credits
+
+Thank you [boot.dev](https://www.boot.dev/) for providing an online back-end learning platform with integrated project ideas.
