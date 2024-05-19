@@ -7,8 +7,8 @@ The bookstore industry lacks an equivalent of the nutritional labels found on gr
 BookBot performs its analysis in Python. Ensure you have Python version 3.12.3 or greater installed on your Windows, Linux, or macOS system by downloading it from [here](https://www.python.org/downloads/). Download the files mentioned below and maintain the same project structure, with all files in the same folder. Ensure that the project folder contains a subfolder named **'books'** (lowercase), which includes the sample text files for analysis and testing.
 - **main.py:** This code utilizes object-oriented programming principles and employs list comprehension for efficient data processing. Comments are provided throughout the codebase to enhance readability and explain the purpose of functions, along with their parameters and return data types.
 - **test_main.py:** This file uses the **'unittest'** library for unit testing of functions. Comments are included for clarity. Edge casese that were considered included file not found and empty file scenarios.
-- **.gitignore:** This file has been configured to exclude the contents of the books folder from git version control, as it contains data rather than code. Downloading this file is optional if this functionality for git is not needed.
-- **books** folder**:** Include this as a subfolder. Save the included **.txt** text files. You can add new text files as well for future analysis and testing!
+- **.gitignore:** Git should be used to maintain data and not code. The current file has a **'#'** symbol you should remove to enable its intended function. When you do that the file will correctly be configured to exclude the contents of the **'books'** folder from git version control, as it contains data rather than code.
+- **'books' folder:** Include this as a subfolder. Save the included **.txt** text files. You can add new text files as well for future analysis and testing!
 
 ## Integrations
 
@@ -16,7 +16,7 @@ The project utilizes the **'string'** module for accessing the alphabet. It also
 
 ## Project Constraints
 
-The project is limited to analyzing text files containing English-language content. It assumes that the text files provided are encoded using **UTF-8**. The tool currently operates solely within the command line interface, lacking a graphical user interface for broader accessibility.
+The project is limited to analyzing text files containing English-language content. It assumes the files use **UTF-8** encoding. The tool currently operates solely within the command line interface, lacking a graphical user interface for broader accessibility.
 
 ## Improvements
 
