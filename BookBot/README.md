@@ -1,6 +1,6 @@
 # BookBot: Problem Statement
 
-The bookstore industry lacks an equivalent of the nutritional labels found on grocery items, presenting a lucrative business opportunity. With insight into the frequency of letters in text, parents and educators could optimize book selections for toddlers. Certain letters are easier or more challenging for young children to pronounce, making this information invaluable. Enter BookBot, a command-line tool designed to fulfill this market need by generating book reports with sorted letter frequency analysis.
+The bookstore industry lacks an equivalent of the nutritional labels found on grocery items, presenting a lucrative business opportunity. With insight into the frequency of letters in text, parents and educators could optimize book selections for toddlers. Certain letters are easier or harder for young children to pronounce, making this information invaluable. Enter BookBot, a command-line tool designed to fulfill this market need by generating book reports with sorted letter frequency analysis.
 
 ## Getting Started
 
@@ -29,4 +29,7 @@ The bullet points below will outline specific areas for improvement. These enhan
 
 ## Credits
 
-Thank you [boot.dev](https://www.boot.dev/) for providing an online back-end learning platform with integrated project ideas.
+Thank you [boot.dev](https://www.boot.dev/) for providing an online back-end learning platform with integrated project ideas. I expanded upon the original project requirements with the following additions:
+
+- Used object-oriented programming and list comprehension
+- Used **unittest** library for testing
