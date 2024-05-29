@@ -21,7 +21,7 @@ class BookBot:
     @staticmethod
     def get_word_count(book):
         ''' Get the word count of the book content
-            Args:
+            Parameters:
                 book (str): The entire book content
             Returns:
                 int: Number of words in the book
@@ -31,7 +31,7 @@ class BookBot:
     @staticmethod
     def get_letters_unsorted(book):
         ''' Count the occurences of letters in a book
-            Args:
+            Parameters:
                 book (str): The entire book content
             Returns:
                 dict: The keys are alphabetical letters, the values are integer counts
@@ -43,7 +43,7 @@ class BookBot:
     @staticmethod
     def get_letters_sorted(unsorted_letters):
         ''' Sort the occurences of letters in a book by frequency used
-            Args:
+            Parameters:
                 unsorted_letters (dict): The keys are alphabetical letters, the values are integer counts
             Returns:
                 dict: The keys are numerically sorted letters, the values are integer counts
@@ -52,7 +52,7 @@ class BookBot:
     
     def generate_report(self, book_found, word_count, letters_sorted):
         ''' Print report of book contents
-            Args:
+            Parameters:
                 book_found (bool): True if file found, False if file not found
                 word_count (int): Number of words in book, 0 if file not found
                 letters (dict): Key-value pairs are letters and integers sorted by letter use in book
