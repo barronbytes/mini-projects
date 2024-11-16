@@ -1,3 +1,3 @@
-# CLI Projects
+# Guided Projects
 
-These projects run from the command-line interface.
+This repository showcases guided projects completed using various resources. Full credit is always given to sources.
