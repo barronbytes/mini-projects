@@ -36,7 +36,7 @@ pip install -r requirements.txt
 python3 -m pygame
 ```
 
-### Pygame Setup
+### VcXsrv Setup
 
 1. Open the PowerShell (not Linux) terminal and ensure you have WSL2 installed with this command:
 ``` powershell
