@@ -22,6 +22,22 @@ Before running this project locally, ensure you have the following installed:
 
 ### Pygame Setup
 
+1. Setup virtual environment:
+``` bash
+python3 -m venv venv
+source venv/bin/activate
+```
+2. Install Pygame using requirements.txt file:
+``` bash
+pip install -r requirements.txt
+```
+3. Verify Pygame installation
+``` bash
+python3 -m pygame
+```
+
+### Pygame Setup
+
 1. Open the PowerShell (not Linux) terminal and ensure you have WSL2 installed with this command:
 ``` powershell
 wsl --version # This will verify if installed
