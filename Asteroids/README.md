@@ -56,6 +56,7 @@ sudo apt update
 sudo apt install x11-apps # 11 are numbers
 xeyes
 ```
+5. This works the first time. On subsequent attempts to run your code, you should **ALWAYS** open a new session of VcXsrv. You do this by launching the **XLaunch** app.
 
 ## Credits
 

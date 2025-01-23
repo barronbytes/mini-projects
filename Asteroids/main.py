@@ -9,9 +9,10 @@ def main():
 
     while running:
 
+        # user clicked popup X to end game
         for event in pygame.event.get():
-            if event.type == pygame.QUIT: # user clicked X to close window
-                return
+            if event.type == pygame.QUIT:
+                running = False
 
         # color over previous game frame
         screen.fill("black")
