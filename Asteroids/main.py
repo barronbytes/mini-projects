@@ -1,5 +1,6 @@
 import pygame
 from constants import *
+from player import Player
 
 def main():
     # pygame setup
@@ -8,6 +9,9 @@ def main():
     clock = pygame.time.Clock()
     dt = 0 # refers to delta time
     running = True
+
+    # player setup
+    player = Player(x=SCREEN_WIDTH/2, y=SCREEN_HEIGHT/2)
 
     while running:
 
@@ -19,9 +23,12 @@ def main():
         # color over previous game frame
         screen.fill("black")
 
+        # render game
+        player.draw(screen)
+        player.update(dt)
+
         # update display to show changes
         pygame.display.flip()
-
         dt = clock.tick(60) / 1000
 
 
