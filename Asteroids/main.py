@@ -1,4 +1,5 @@
 import pygame
+from itertools import product
 from constants import *
 from player import Player
 from asteroid import Asteroid
@@ -22,7 +23,6 @@ def main():
     Player.containers = (draw_group, update_group)
     PlayerShot.containers = (shots_group, draw_group, update_group)
     Asteroid.containers = (asteroids_group, draw_group, update_group)
-    
     AsteroidField.containers = (update_group)
 
     player = Player(x=SCREEN_WIDTH/2, y=SCREEN_HEIGHT/2)
@@ -30,27 +30,36 @@ def main():
 
     while running:
 
-        # user clicked X on popup or Esc key to end game
-        running = not any(
-            event.type == pygame.QUIT or 
+        # previous game frame
+        screen.fill("black")
+
+        # render new game (draw and update sprites)
+        [sprite_obj.draw(screen) for sprite_obj in draw_group]
+        [sprite_obj.update(dt) for sprite_obj in update_group]
+
+        # game logic (collisions)
+        for shot, asteroid in product(shots_group, asteroids_group):
+            if shot.calc_collisions(asteroid):
+                shot.kill()
+                asteroid.kill()
+
+        # update game display
+        pygame.display.flip()
+
+        # calculate delta time for next game frame
+        dt = clock.tick(60) / 1000
+
+        # end game
+        end_by_user = any(
+            event.type == pygame.QUIT or
             (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE)
             for event in pygame.event.get()
         )
-
-        # color over previous game frame
-        screen.fill("black")
-
-        # render game
-        [sprite_obj.draw(screen) for sprite_obj in draw_group]
-        [sprite_obj.update(dt) for sprite_obj in update_group]
-        running = not any(
+        end_by_game = any(
             player.calc_collisions(asteroid)
             for asteroid in asteroids_group
         )
-
-        # update display to show changes
-        pygame.display.flip()
-        dt = clock.tick(60) / 1000
+        running = False if (end_by_user == True or end_by_game == True) else True
 
 
 if __name__ == "__main__":
