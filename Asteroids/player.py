@@ -1,6 +1,7 @@
 import pygame
 from constants import *
 from circle_shape import CircleShape
+from player_shot import PlayerShot
 
 
 class Player(CircleShape):
@@ -25,8 +26,9 @@ class Player(CircleShape):
             pygame.K_RIGHT: lambda: self.rotate(dt),   # rotate right
             pygame.K_w: lambda: self.move_forward(dt),  # move forward
             pygame.K_UP: lambda: self.move_forward(dt),  # move forward
-            pygame.K_s: lambda: self.move_backward(dt),  # Move backward
-            pygame.K_DOWN: lambda: self.move_backward(dt),  # Move backward
+            pygame.K_s: lambda: self.move_backward(dt),  # move backward
+            pygame.K_DOWN: lambda: self.move_backward(dt),  # move backward
+            pygame.K_SPACE: lambda: self.shot(), # generate shot
         }
 
         [action() for key, action in key_actions.items() if keys[key]]
@@ -51,3 +53,6 @@ class Player(CircleShape):
         backward = pygame.Vector2(0, -1).rotate(self.rotation)
         self.position += backward * PLAYER_SPEED * dt
 
+    def shot(self):
+        shot = PlayerShot(self.position.x, self.position.y)
+        shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * SHOT_SPEED
