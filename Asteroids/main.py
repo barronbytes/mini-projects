@@ -1,6 +1,8 @@
 import pygame
 from constants import *
 from player import Player
+from asteroid import Asteroid
+from asteroid_field import AsteroidField
 
 def main():
     # pygame setup
@@ -10,11 +12,16 @@ def main():
     dt = 0 # refers to delta time
     running = True
 
-    # player sprite setup
-    update_group = pygame.sprite.Group()
+    # sprite setup
     draw_group = pygame.sprite.Group()
-    Player.containers = (update_group, draw_group)
+    update_group = pygame.sprite.Group()
+    asteroids_group = pygame.sprite.Group()
+    Player.containers = (draw_group, update_group)
+    Asteroid.containers = (asteroids_group, draw_group, update_group)
+    AsteroidField.containers = (update_group)
+
     player = Player(x=SCREEN_WIDTH/2, y=SCREEN_HEIGHT/2)
+    asteroid_field = AsteroidField()
 
     while running:
 

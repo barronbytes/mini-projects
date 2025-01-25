@@ -2,6 +2,7 @@ import pygame
 from constants import *
 from circle_shape import CircleShape
 
+
 class Player(CircleShape):
 
     # initialize Player class instance (default radius)
@@ -11,7 +12,7 @@ class Player(CircleShape):
 
     # override parent class
     def draw(self, screen):
-        pygame.draw.polygon(screen, "white", self.triangle(), 2)
+        pygame.draw.polygon(surface=screen, color="white", points=self.triangle(), width=2)
 
     # override parent class
     def update(self, dt):
