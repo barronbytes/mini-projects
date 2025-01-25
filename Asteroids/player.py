@@ -19,9 +19,13 @@ class Player(CircleShape):
     
         key_actions = {
             pygame.K_a: lambda: self.rotate(-dt),  # rotate left
+            pygame.K_LEFT: lambda: self.rotate(-dt),  # rotate left
             pygame.K_d: lambda: self.rotate(dt),   # rotate right
+            pygame.K_RIGHT: lambda: self.rotate(dt),   # rotate right
             pygame.K_w: lambda: self.move_forward(dt),  # move forward
-            pygame.K_s: lambda: self.move_backward(dt)  # Move backward
+            pygame.K_UP: lambda: self.move_forward(dt),  # move forward
+            pygame.K_s: lambda: self.move_backward(dt),  # Move backward
+            pygame.K_DOWN: lambda: self.move_backward(dt),  # Move backward
         }
 
         [action() for key, action in key_actions.items() if keys[key]]
