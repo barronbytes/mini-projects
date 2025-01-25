@@ -10,6 +10,7 @@ class Player(CircleShape):
     def __init__(self, x, y):
         super().__init__(x, y, radius=PLAYER_RADIUS)
         self.rotation = 0 # rotation angle (in degrees)
+        self.shot_timer = 0
 
     # override parent class
     def draw(self, screen):
@@ -18,6 +19,7 @@ class Player(CircleShape):
     # override parent class
     def update(self, dt):
         keys = pygame.key.get_pressed()
+        self.shot_timer -= dt
     
         key_actions = {
             pygame.K_a: lambda: self.rotate(-dt),  # rotate left
@@ -54,5 +56,11 @@ class Player(CircleShape):
         self.position += backward * PLAYER_SPEED * dt
 
     def shot(self):
+
+        # logic to enfore delay between shots
+        if self.shot_timer > 0:
+            return
+        self.shot_timer = SHOT_DELAY
+
         shot = PlayerShot(self.position.x, self.position.y)
         shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * SHOT_SPEED
