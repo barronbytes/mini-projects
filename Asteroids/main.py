@@ -38,6 +38,10 @@ def main():
         # render game
         [sprite_obj.draw(screen) for sprite_obj in draw_group]
         [sprite_obj.update(dt) for sprite_obj in update_group]
+        running = not any(
+            player.calc_collisions(asteroid)
+            for asteroid in asteroids_group
+        )
 
         # update display to show changes
         pygame.display.flip()
