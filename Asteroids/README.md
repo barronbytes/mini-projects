@@ -17,6 +17,7 @@ Before running this project locally, ensure you have the following installed:
 - Python (version 2.6.1 or above)
 - Pygame module
 - VcXsrv (if running WSL--instructions below)
+- Pygbag (will need this to create web-ready version of project)
 
 ## Installations
 
@@ -57,6 +58,16 @@ sudo apt install x11-apps # 11 are numbers
 xeyes
 ```
 5. This works the first time. On subsequent attempts to run your code, you should **ALWAYS** open a new session of VcXsrv. You do this by launching the **XLaunch** app.
+
+### Pygbag Setup
+
+1. Be inside project folder before using Linux commands
+2. Linux (update package manager): sudo apt update
+3. Linux (virtual environment): python3 -m venv myenv && source myenv/bin/activate
+4. Linux (install pygbag): pip install pygbag
+5. Linux (verify install): pygbag --version
+6. Edit **main.py** file only as instructed by [pygbag community]. (https://pygame-web.github.io/wiki/pygbag/)
+7. Linux (convert files): **pygbag .**
 
 ## Credits
 
