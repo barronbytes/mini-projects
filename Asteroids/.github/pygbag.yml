@@ -17,3 +17,4 @@ jobs:
         with:
           branch: gh-pages
           folder: Asteroids/build/web
+          target_folder: Asteroids  # this is where the content will go in the gh-pages branch
