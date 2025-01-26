@@ -1,14 +1,16 @@
 # Asteroids
 
-This is a retro asteroids game.
+This project is a retro-style Asteroids game built with Python's Pygame. It was converted to a browser-compatible format using Pygbag and deployed on GitHub Pages.
 
 ## Visit The Site
 
-Feel free to check out the project here!
+Feel free to check out the [project here](https://barronbytes.github.io/Asteroids/)!
+
+![Asteroids Game Screenshot](images/asteroids_game.PNG)
 
 ## Features
 
-- **Pygame:** Module
+- **Pygame:** Utilized to create 5 classes for game environment
 
 ## Prerequisites
 
@@ -69,6 +71,19 @@ xeyes
 6. Edit **main.py** file only as instructed by the [pygbag community](https://pygame-web.github.io/wiki/pygbag/).
 7. Linux (convert files): **pygbag .**
 
-## Credits
+## Usage (How To Play!)
 
-Thank you [boot.dev](https://www.boot.dev/) for providing an online back-end learning platform with integrated project ideas.
+Use keyboard strokes to control spaceship:
+- Move up: *w* or *up* arrow
+- Move down: *s* or *down* arrow
+- Move left: *a* or *left* arrow
+- Move right: *d* or *right* arrow
+- Shot asteroids: *spacebar*
+
+User keyboard or mouse actions to exit game:
+- Click upper righthand corner 'X' to close game browser (only works on pygame version)
+- Click **Esc** button (works on both pygame and web version)
+
+## Credits & Contributing
+
+Thank you [boot.dev](https://www.boot.dev/) for providing an online back-end learning platform with integrated project ideas Contributions are welcome! Feel free to submit a pull request to improve the project or open an issue to report any problems.
