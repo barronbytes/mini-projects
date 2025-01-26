@@ -101,4 +101,4 @@ The project’s features and deployment model can be improved. Game logic can be
 
 ## Credits & Contributing
 
-Thank you [boot.dev](https://www.boot.dev/) for providing an online back-end learning platform with integrated project ideas Contributions are welcome! Feel free to submit a pull request to improve the project or open an issue to report any problems.
+Thank you [boot.dev](https://www.boot.dev/) for providing an online back-end learning platform with integrated project ideas. Contributions are welcome! Feel free to submit a pull request to improve the project or open an issue to report any problems.
