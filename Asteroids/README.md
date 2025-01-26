@@ -6,7 +6,8 @@ This project is a retro-style Asteroids game built with Python's Pygame. It was 
 
 Feel free to check out the [project here](https://barronbytes.github.io/Asteroids/)!
 
-![Asteroids Game Screenshot](images/asteroids_game.PNG)
+<!-- HTML image tag to control size -->
+<img src="images/asteroids_game.PNG" alt="Asteroids Game Screenshot" width="80%">
 
 ## Features
 
