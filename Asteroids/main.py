@@ -1,3 +1,4 @@
+import asyncio
 import pygame
 from itertools import product
 from constants import *
@@ -7,12 +8,12 @@ from asteroid_field import AsteroidField
 from player_shot import PlayerShot
 
 
-def main():
+async def main():
     # pygame setup
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
-    dt = 0 # refers to delta time
+    dt = 0
     running = True
 
     # sprite setup
@@ -29,7 +30,6 @@ def main():
     asteroid_field = AsteroidField()
 
     while running:
-
         # previous game frame
         screen.fill("black")
 
@@ -48,6 +48,7 @@ def main():
 
         # calculate delta time for next game frame
         dt = clock.tick(60) / 1000
+        await asyncio.sleep(0)
 
         # end game
         end_by_user = any(
@@ -62,5 +63,4 @@ def main():
         running = False if (end_by_user == True or end_by_game == True) else True
 
 
-if __name__ == "__main__":
-    main()
+asyncio.run(main())
