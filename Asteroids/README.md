@@ -66,7 +66,7 @@ xeyes
 3. Linux (virtual environment): python3 -m venv myenv && source myenv/bin/activate
 4. Linux (install pygbag): pip install pygbag
 5. Linux (verify install): pygbag --version
-6. Edit **main.py** file only as instructed by [pygbag community]. (https://pygame-web.github.io/wiki/pygbag/)
+6. Edit **main.py** file only as instructed by [pygbag community](https://pygame-web.github.io/wiki/pygbag/).
 7. Linux (convert files): **pygbag .**
 
 ## Credits
