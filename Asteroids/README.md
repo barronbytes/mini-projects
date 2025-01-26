@@ -10,7 +10,7 @@ Feel free to check out the [project here](https://barronbytes.github.io/Asteroid
 
 ## Features
 
-- **Pygame:** Utilized to create 5 classes for game environment
+- **Pygame:** Utilized to create 5 classes for game environment.
 
 ## Prerequisites
 
@@ -83,6 +83,16 @@ Use keyboard strokes to control spaceship:
 User keyboard or mouse actions to exit game:
 - Click upper righthand corner 'X' to close game browser (only works on pygame version)
 - Click **Esc** button (works on both pygame and web version)
+
+## Development Roadmap
+
+### Setbacks
+
+This was my first project using both **vector math** and **Pygame**. While I referred to Pygame’s documentation throughout the project, [Boot.dev](https://www.boot.dev/) provided significant guidance in teaching me how to use the library effectively. This project allowed me to wrestle with game design decisions.
+
+### Successes
+
+### Improvements
 
 ## Credits & Contributing
 
