@@ -1,6 +1,6 @@
 # Asteroids
 
-This project is a retro-style Asteroids game built with Python's Pygame. It was converted to a browser-compatible format using Pygbag and deployed on GitHub Pages.
+This project is a retro-style Asteroids game built with Python's Pygame. The end result was converted to a browser-compatible format using Pygbag and deployed on GitHub Pages.
 
 ## Visit The Site
 
@@ -35,7 +35,7 @@ source venv/bin/activate
 ``` bash
 pip install -r requirements.txt
 ```
-3. Verify Pygame installation
+3. Verify Pygame installation:
 ``` bash
 python3 -m pygame
 ```
@@ -89,15 +89,15 @@ User keyboard or mouse actions to exit game:
 
 ### Setbacks
 
-This was my first project using both **vector math** and **Pygame**. While I referred to Pygame’s documentation throughout the project, [Boot.dev](https://www.boot.dev/) provided significant guidance in teaching me how to use the library effectively. This project allowed me to wrestle with game design decisions.
+This was my first project using both **vector math** and **Pygame**. While I referred to Pygame's documentation throughout the project, [Boot.dev](https://www.boot.dev/) provided significant guidance in teaching me how to use the library effectively. This project allowed me to wrestle with game design decisions.
 
 ### Successes
 
-I applied object-oriented programming concepts (like abstract classes and inheritance) and functional programming techniques, while also improving the project’s documentation. After realizing Pygame cannot run in browsers, I discovered [Pygbag, a tool for converting Python to WebAssembly](https://pygame-web.github.io/wiki/pygbag/), and used the newly converted files [to deploy the game on GitHub Pages](https://docs.github.com/en/pages).
+I applied object-oriented programming concepts (like abstract classes and inheritance) and functional programming techniques, while also improving the project's documentation. After realizing Pygame cannot run in browsers, I discovered [Pygbag, a tool for converting Python to WebAssembly](https://pygame-web.github.io/wiki/pygbag/), and used the newly converted files [to deploy the game on GitHub Pages](https://docs.github.com/en/pages).
 
 ### Improvements
 
-The project’s features and deployment model can be improved. Game logic can be updated to track leaderboard scores, monitor game lives, and support touchscreen input for mobile and tablet users. Additionally, my initial attempt to use a YAML file for continuous deployment failed. [Pygbag provides deployment documentation](https://pygame-web.github.io/wiki/publishing/github.io/) for using YAML files and GitHub Actions for this deployment model.
+The project's features and deployment model can be improved. Game logic can be updated to track leaderboard scores, monitor game lives, and support touchscreen input for mobile and tablet users. Additionally, my initial attempt to use a YAML file for continuous deployment failed. [Pygbag provides deployment documentation](https://pygame-web.github.io/wiki/publishing/github.io/) for using YAML files and GitHub Actions for this deployment model.
 
 ## Credits & Contributing
 
