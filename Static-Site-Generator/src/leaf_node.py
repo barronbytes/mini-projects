@@ -12,9 +12,14 @@ class LeafNode(HTMLNode):
             props (dict, optional): HTML attributes. Defaults to None.
             value (str): HTML tag content.
         '''
+
+        invalid_parameters = ", ".join([f"{param_name}=None" for param_name, param_value in zip(["tag", "value"], [tag, value]) if param_value is None])
+        if invalid_parameters:
+            raise ValueError(f"Invalid parameter(s): {invalid_parameters}")
+
         super().__init__(tag=tag, props=props, value=value, children=None)
 
-    # override parent abstract class
+    # override parent class
     def to_html(self):
         tag_props = self.props_to_html()
         tag_open = f"<{self.tag}{tag_props}>" if self.tag is not None else ""
