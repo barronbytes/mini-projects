@@ -1,14 +1,27 @@
 class HTMLNode():
     # string, dict, string, list
     def __init__(self, tag=None, props=None, value=None, children=None):
-        self.tag= tag
-        self.props= props
-        self.value= value if children is None else None
-        self.children= children if value is None else None
+        '''
+        Initializes a HTMLNode instance.
+
+        Parameters:
+            tag (str, optional): HTML tag. Defaults to None.
+            props (dict, optional): HTML attributes. Defaults to None.
+            value (str, optional): HTML tag content. Defaults to None.
+            children (list, optional): HTML tag children for parent tags. Defaults to None.
+        '''
+        self.tag = tag
+        self.props = props
+        self.value = value
+        self.children = children
 
     # object string representation
     def __repr__(self):
-        return f"HTMLNode(tag={self.tag}, props={self.props}, value={self.value}, children={self.children})"
+        tag_display = f"\"{self.tag}\"" if self.tag is not None else None
+        props_display = self.props if self.props is not None else None
+        value_display = f"\"{self.value}\"" if self.value is not None else None
+        children_display = self.children if self.children is not None else None
+        return f"HTMLNode(tag={tag_display}, props={props_display}, value={value_display}, children={children_display})"
 
     # equals
     def __eq__(self, other):

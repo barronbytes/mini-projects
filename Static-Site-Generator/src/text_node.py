@@ -13,13 +13,22 @@ class TextType(Enum):
 class TextNode():
 
     def __init__(self, text, text_type, url=None):
+        '''
+        Initializes a TextNode instance.
+
+        Parameters:
+            text (str): String of text.
+            text_type (TextType): Defined enum value.
+            url (str, optional): Optional URL string. Defaults to None.
+        '''
         self.text = text
         self.text_type = text_type
         self.url = url
 
     # object string representation
     def __repr__(self):
-        return f"TextNode(text={self.text}, text_type={self.text_type}, url={self.url})"
+        url_display = f"\"{self.url}\"" if self.url is not None else None
+        return f"TextNode(text=\"{self.text}\", text_type={self.text_type}, url={url_display})"
 
     # equals
     def __eq__(self, other):
