@@ -2,6 +2,7 @@ import unittest
 
 from leaf_node import LeafNode
 
+
 class TestLeafNode(unittest.TestCase):
     def test_init_value_error_of_tag(self):
         with self.assertRaises(ValueError) as context:
