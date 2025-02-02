@@ -33,6 +33,11 @@ class TestTextNode(unittest.TestCase):
         expected_html = "<i class=\"fw-900\">Hello world.</i>"
         self.assertEqual(node.to_leaf_node().to_html(), expected_html)
 
+    def test_tn_to_html_code(self):
+        node = TextNode("Boot Dev", TextType.CODE, "pyTHon")
+        expected_html = "<pre><code class=\"language-python\">Boot Dev</code></pre>"
+        self.assertEqual(node.to_leaf_node().to_html(), expected_html)
+
     def test_tn_to_html_link(self):
         node = TextNode("Boot Dev", TextType.LINK, "https://www.boot.dev")
         expected_html = "<a href=\"https://www.boot.dev\">Boot Dev</a>"

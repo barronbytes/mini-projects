@@ -52,11 +52,10 @@ class TextNode():
         leaf_tag = TAG_TYPE.get(self.text_type, None)
         leaf_value = self.text if self.text_type not in special_value else (
             "" if self.text_type == TextType.IMAGE else
-            f"<code class=\"language-{self.props}\">{self.text}</code>"
+            f"<code class=\"language-{self.props.lower()}\">{self.text}</code>"
         )
         leaf_props = self.props if self.text_type not in special_props else (
-            None if self.text_type == TextType.TEXT else
             {"href":f"{self.props}"} if self.text_type == TextType.LINK else
-            {"src":f"{self.props}", "alt": f"{self.text}"}
+            {"src":f"{self.props}", "alt": f"{self.text}"} if self.text_type == TextType.IMAGE else None
         )
         return LeafNode(leaf_tag, leaf_value, leaf_props)
