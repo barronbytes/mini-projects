@@ -12,7 +12,6 @@ class LeafNode(HTMLNode):
             props (dict, optional): HTML attributes. Defaults to None.
             value (str): HTML tag content.
         '''
-
         invalid_parameters = ", ".join([f"{param_name}=None" for param_name, param_value in zip(["value"], [value]) if param_value is None])
         if invalid_parameters:
             raise ValueError(f"Invalid parameter(s): {invalid_parameters}")

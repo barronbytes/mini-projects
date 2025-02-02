@@ -13,7 +13,6 @@ class ParentNode(HTMLNode):
             props (dict, optional): HTML attributes. Defaults to None.
             children (list): LeafNode list of children from parent tag.
         '''
-
         invalid_parameters = ", ".join([f"{param_name}=None" for param_name, param_value in zip(["tag", "children"], [tag, children]) if param_value is None])
         if invalid_parameters:
             raise ValueError(f"Invalid parameter(s): {invalid_parameters}")
@@ -24,6 +23,6 @@ class ParentNode(HTMLNode):
     def to_html(self):
         tag_props = self.props_to_html()
         tag_open = f"<{self.tag}{tag_props}>"
+        tag_children = "".join([leaf.to_html() for leaf in self.children])
         tag_close = f"</{self.tag}>"
-
-        return f"{tag_open}{tag_close}"
+        return f"{tag_open}{tag_children}{tag_close}"
