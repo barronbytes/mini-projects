@@ -13,7 +13,7 @@ class LeafNode(HTMLNode):
             value (str): HTML tag content.
         '''
 
-        invalid_parameters = ", ".join([f"{param_name}=None" for param_name, param_value in zip(["tag", "value"], [tag, value]) if param_value is None])
+        invalid_parameters = ", ".join([f"{param_name}=None" for param_name, param_value in zip(["value"], [value]) if param_value is None])
         if invalid_parameters:
             raise ValueError(f"Invalid parameter(s): {invalid_parameters}")
 

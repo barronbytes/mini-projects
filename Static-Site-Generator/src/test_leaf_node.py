@@ -4,20 +4,10 @@ from leaf_node import LeafNode
 
 
 class TestLeafNode(unittest.TestCase):
-    def test_init_value_error_of_tag(self):
-        with self.assertRaises(ValueError) as context:
-            LeafNode(None, "Hello World")
-        self.assertEqual(str(context.exception), "Invalid parameter(s): tag=None")
-
     def test_init_value_error_of_value(self):
         with self.assertRaises(ValueError) as context:
             LeafNode("p", None)
         self.assertEqual(str(context.exception), "Invalid parameter(s): value=None")
-
-    def test_init_value_error_of_tag_and_value(self):
-        with self.assertRaises(ValueError) as context:
-            LeafNode(None, None)
-        self.assertEqual(str(context.exception), "Invalid parameter(s): tag=None, value=None")
 
     def test_eq(self):
         node1 = LeafNode("p", "Hello World", None)
