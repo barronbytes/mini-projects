@@ -1,6 +1,9 @@
+from typing import Optional
+
+
 class HTMLNode():
-    # string, dict, string, list
-    def __init__(self, tag=None, props=None, value=None, children=None):
+    def __init__(self, tag: Optional[str] = None, props: Optional[dict] = None, 
+             value: Optional[str] = None, children: Optional[list['HTMLNode']] = None):
         '''
         Initializes a HTMLNode instance.
 
@@ -16,7 +19,7 @@ class HTMLNode():
         self.children = children
 
     # object string representation
-    def __repr__(self):
+    def __repr__(self) -> str:
         tag_display = f"\"{self.tag}\"" if self.tag is not None else None
         props_display = self.props if self.props is not None else None
         value_display = f"\"{self.value}\"" if self.value is not None else None
@@ -24,7 +27,7 @@ class HTMLNode():
         return f"HTMLNode(tag={tag_display}, props={props_display}, value={value_display}, children={children_display})"
 
     # equals
-    def __eq__(self, other):
+    def __eq__(self, other: object) -> bool:
         equality = False
         if isinstance(other, HTMLNode):
             equality = True if self.tag == other.tag and self.props == other.props and self.value == other.value and self.children == other.children else False
@@ -33,6 +36,6 @@ class HTMLNode():
     def to_html(self):
         raise NotImplementedError("Not implemented.")
     
-    def props_to_html(self):
+    def props_to_html(self) -> str:
         props_html= "".join(f' {k}="{v}"' for k, v in self.props.items()) if isinstance(self.props, dict) else ""
         return props_html

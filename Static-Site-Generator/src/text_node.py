@@ -36,17 +36,17 @@ class TextNode():
         self.props = props
 
     # object string representation
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"TextNode(text=\"{self.text}\", text_type={self.text_type}, props={self.props})"
 
     # equals
-    def __eq__(self, other):
+    def __eq__(self, other: object) -> bool:
         equality = False
         if isinstance(other, TextNode):
             equality = True if self.text == other.text and self.text_type == other.text_type and self.props == other.props else False
         return equality
     
-    def to_leaf_node(self):
+    def to_leaf_node(self) -> LeafNode:
         special_value = [TextType.CODE, TextType.IMAGE]
         special_props = [TextType.TEXT, TextType.CODE, TextType.LINK, TextType.IMAGE]
         leaf_tag = TAG_TYPE.get(self.text_type, None)
