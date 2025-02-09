@@ -59,16 +59,17 @@ class InlineMarkdown():
         matches = list(pattern.finditer(self.text)) # return fresh list of matches instead of an exhausted iterator
         return matches
 
-    def create_markup_nodes(self, matches: list[tuple[list[re.Match[str]], TextType]]) -> list[tuple[int, int, TextNode]]:
-        markup_nodes = []
+    def create_group_nodes(self, matches: list[tuple[list[re.Match[str]], TextType]]) -> list[tuple[int, int, TextNode]]:
+        group_nodes = []
         for match_list, node_type in matches:
-            markup_nodes.extend(
+            group_nodes.extend(
                 self._map_for_image(m) if node_type == TextType.IMAGE else 
-                self._map_for_link(m) if node_type == TextType.LINK else 
-                None
+                self._map_for_link(m) if node_type == TextType.LINK else
+                self._map_for_code(m) if node_type == TextType.CODE else
+                self._map_for_bold_italic(m, node_type)
                 for m in match_list
             )
-        return markup_nodes
+        return self._delete_empty_nodes(group_nodes)
 
     def _map_for_image(self, m: re.Match[str]) -> tuple[int, int, TextNode]:
         image_text = m.group("image_text")
@@ -79,66 +80,49 @@ class InlineMarkdown():
         link_text = m.group("link_text")
         link_url = m.group("link_url")
         return (m.start(), m.end(), TextNode(link_text, TextType.LINK, link_url))
-
-
-
-    def get_markup_matchesss(self) -> list[tuple[int, int, TextNode]]:
-        results = []
-        for delimiter, node_type in DELIMITERS.items():
-            if node_type in [TextType.LINK, TextType.IMAGE]:
-                regex = delimiter
-            else:
-                regex = fr"{delimiter}(?P<node_text>.*?){delimiter}"
-            
-            pattern = re.compile(pattern=regex, flags=re.DOTALL | re.MULTILINE)
-            matches = pattern.finditer(self.text)
-
-            for found in matches:
-                if node_type == TextType.LINK:
-                    results.append(self.map_for_link(found))
-                elif node_type == TextType.IMAGE:
-                    results.append(self.map_for_image(found))
-                else:
-                    node_text = found.group("node_text")
-                    if node_text != "":
-                        results.append(
-                            self.map_for_code(found) if node_type == TextType.CODE else
-                            (found.start(), found.end(), TextNode(node_text, node_type, None))
-                        )
-        return results
     
-    def map_for_code(self, found: re.Match[str]) -> tuple[int, int, TextNode]:
-        node_text = found.group("node_text")
+    def _map_for_code(self, m: re.Match[str]) -> tuple[int, int, TextNode]:
+        node_text = m.group("node_text")
         language = next(
             (lang for lang in CODE_LANGUAGES if node_text.lower().startswith(lang+" ")),
             ""
         )
         node_text = node_text[len(language):].lstrip()
-        return (found.start(), found.end(), TextNode(node_text, TextType.CODE, language))
+        return (m.start(), m.end(), TextNode(node_text, TextType.CODE, language))
 
-    def get_indices(self, markup_nodes: list[tuple[int, int, TextNode]]) -> list[tuple[int, int]]:
-        results = []
-        results.append((0, markup_nodes[0][0]))
-        results.extend(
-            (markup_nodes[i-1][1], markup_nodes[i][0])
-            for i in range(1, len(markup_nodes))
-        )
-        results.append((markup_nodes[-1][1], len(self.text)))
-        return results
+    def _map_for_bold_italic(self, m: re.Match[str], node_type: TextType) -> tuple[int, int, TextNode]:
+        node_text = m.group("node_text")
+        return (m.start(), m.end(), TextNode(node_text, node_type, None))
     
-    def get_default_matches(self, indices: list[tuple[int, int]]) -> list[tuple[int, int, TextNode]]:
-        results = [
+    def _delete_empty_nodes(self, group_nodes: list[tuple[int, int, TextNode]]) -> list[tuple[int, int, TextNode]]:
+        return [
+            node
+            for node in group_nodes
+            if not (node[2].text == "" and node[2].text_type in [TextType.BOLD, TextType.ITALIC])
+        ]
+
+    def get_indices(self, group_nodes: list[tuple[int, int, TextNode]]) -> list[tuple[int, int]]:
+        indices = []
+        indices.append((0, group_nodes[0][0]))
+        indices.extend(
+            (group_nodes[i-1][1], group_nodes[i][0])
+            for i in range(1, len(group_nodes))
+        )
+        indices.append((group_nodes[-1][1], len(self.text)))
+        return indices
+    
+    def create_default_nodes(self, indices: list[tuple[int, int]]) -> list[tuple[int, int, TextNode]]:
+        default_nodes = [
             (pair[0], pair[1], TextNode(self.text[pair[0]:pair[1]], TextType.TEXT, None))
             for pair in indices
         ]
-        return results
+        return default_nodes
 
     def to_text_nodes(self) -> list[TextNode]:
         matches = self.find_matches()
-        markup_nodes = [] if matches == [] else self.create_markup_nodes(matches)
-        return markup_nodes
-        #markup_nodes.sort(key=lambda x: x[0])
-        #indices = self.get_indices(markup_nodes)
-        #default_nodes = self.get_default_matches(indices)
-        #all_nodes = sorted(markup_nodes+default_nodes, key=lambda x: x[0])
-        #return ([node[2] for node in all_nodes])
+        group_nodes = [] if matches == [] else self.create_group_nodes(matches)
+        group_nodes.sort(key=lambda x: x[0])
+        indices = self.get_indices(group_nodes)
+        default_nodes = self.create_default_nodes(indices)
+        all_nodes = sorted(group_nodes + default_nodes, key=lambda x: x[0])
+        return ([node[2] for node in all_nodes])

@@ -23,7 +23,7 @@ class TextInlineMarkdown(unittest.TestCase):
         text = "I did not watch ![Wicked](wicked.png) nor ![Twisters](twisters.png) in theaters."
         md = InlineMarkdown(text)
         self.assertListEqual(
-            md.create_markup_nodes(md.find_matches()),
+            md.create_group_nodes(md.find_matches()),
             [
                 (16, 37, TextNode("Wicked", TextType.IMAGE, "wicked.png")),
                 (42, 67, TextNode("Twisters", TextType.IMAGE, "twisters.png")),
@@ -34,52 +34,49 @@ class TextInlineMarkdown(unittest.TestCase):
         text = "I am a [boot.dev](https://boot.dev) member since 2024 and counting."
         md = InlineMarkdown(text)
         self.assertListEqual(
-            md.create_markup_nodes(md.find_matches()),
+            md.create_group_nodes(md.find_matches()),
             [
                 (7, 35, TextNode("boot.dev", TextType.LINK, "https://boot.dev")),
             ]
         )
-    
-    @unittest.skip("Skipping this test for now")
-    def test_delim_bold(self):
-        text = "This has **bold** text **twice** inside."
-        md = InlineMarkdown(text)
-        self.assertListEqual(
-            md.to_text_nodes(),
-            [
-                TextNode("This has ", TextType.TEXT),
-                TextNode("bold", TextType.BOLD),
-                TextNode(" text ", TextType.TEXT),
-                TextNode("twice", TextType.BOLD),
-                TextNode(" inside.", TextType.TEXT),
-            ]
-        )
 
-    @unittest.skip("Skipping this test for now")
-    def test_delim_bold_italic(self):
-        text = "This has **bold** and _italic_ inside."
-        md = InlineMarkdown(text)
-        self.assertListEqual(
-            md.to_text_nodes(),
-            [
-                TextNode("This has ", TextType.TEXT),
-                TextNode("bold", TextType.BOLD),
-                TextNode(" and ", TextType.TEXT),
-                TextNode("italic", TextType.ITALIC),
-                TextNode(" inside.", TextType.TEXT),
-            ]
-        )
-
-    @unittest.skip("Skipping this test for now")
-    def test_delim_code(self):
+    def test_match_code(self):
         text = "Every coder writes `python print(\"Hello World.\")` at the start."
         md = InlineMarkdown(text)
         self.assertListEqual(
+            md.create_group_nodes(md.find_matches()),
+            [
+                (19, 49, TextNode("print(\"Hello World.\")", TextType.CODE, "python")),
+            ]
+        )
+
+    def test_match_bold_italic(self):
+        text = "You **must** know that rules _can be_ broken."
+        md = InlineMarkdown(text)
+        self.assertListEqual(
+            md.create_group_nodes(md.find_matches()),
+            [
+                (4, 12, TextNode("must", TextType.BOLD, None)),
+                (29, 37, TextNode("can be", TextType.ITALIC, None)),
+            ]
+        )
+    
+    def test_to_text_nodes(self):
+        text = "This is **text** with an *italic* word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
+        md = InlineMarkdown(text)
+        self.assertListEqual(
             md.to_text_nodes(),
             [
-                TextNode("Every coder writes ", TextType.TEXT),
-                TextNode("print(\"Hello World.\")", TextType.CODE, "python"),
-                TextNode(" at the start.", TextType.TEXT),
+                TextNode("This is ", TextType.TEXT),
+                TextNode("text", TextType.BOLD),
+                TextNode(" with an ", TextType.TEXT),
+                TextNode("italic", TextType.ITALIC),
+                TextNode(" word and a ", TextType.TEXT),
+                TextNode("code block", TextType.CODE, ""),
+                TextNode(" and an ", TextType.TEXT),
+                TextNode("obi wan image", TextType.IMAGE, "https://i.imgur.com/fJRm4Vk.jpeg"),
+                TextNode(" and a ", TextType.TEXT),
+                TextNode("link", TextType.LINK, "https://boot.dev"),
             ]
         )
 
