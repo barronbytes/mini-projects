@@ -60,8 +60,22 @@ class TextInlineMarkdown(unittest.TestCase):
                 (29, 37, TextNode("can be", TextType.ITALIC, None)),
             ]
         )
-    
-    def test_to_text_nodes(self):
+
+    def test_nodes_bold_italic(self):
+        text = "You **must** know that rules _can be_ broken."
+        md = InlineMarkdown(text)
+        self.assertListEqual(
+            md.to_text_nodes(),
+            [
+                TextNode("You ", TextType.TEXT),
+                TextNode("must", TextType.BOLD),
+                TextNode(" know that rules ", TextType.TEXT),
+                TextNode("can be", TextType.ITALIC),
+                TextNode(" broken.", TextType.TEXT),
+            ]
+        )
+
+    def test_nodes_all(self):
         text = "This is **text** with an *italic* word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
         md = InlineMarkdown(text)
         self.assertListEqual(

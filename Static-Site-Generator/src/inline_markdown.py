@@ -69,7 +69,7 @@ class InlineMarkdown():
                 self._map_for_bold_italic(m, node_type)
                 for m in match_list
             )
-        return self._delete_empty_nodes(group_nodes)
+        return self._delete_group_nodes(group_nodes)
 
     def _map_for_image(self, m: re.Match[str]) -> tuple[int, int, TextNode]:
         image_text = m.group("image_text")
@@ -94,7 +94,7 @@ class InlineMarkdown():
         node_text = m.group("node_text")
         return (m.start(), m.end(), TextNode(node_text, node_type, None))
     
-    def _delete_empty_nodes(self, group_nodes: list[tuple[int, int, TextNode]]) -> list[tuple[int, int, TextNode]]:
+    def _delete_group_nodes(self, group_nodes: list[tuple[int, int, TextNode]]) -> list[tuple[int, int, TextNode]]:
         return [
             node
             for node in group_nodes
@@ -116,7 +116,14 @@ class InlineMarkdown():
             (pair[0], pair[1], TextNode(self.text[pair[0]:pair[1]], TextType.TEXT, None))
             for pair in indices
         ]
-        return default_nodes
+        return self._delete_default_nodes(default_nodes)
+    
+    def _delete_default_nodes(self, default_nodes: list[tuple[int, int, TextNode]]) -> list[tuple[int, int, TextNode]]:
+        return [
+            node
+            for node in default_nodes
+            if not (node[2].text == "" and node[2].text_type == TextType.TEXT)
+        ]
 
     def to_text_nodes(self) -> list[TextNode]:
         matches = self.find_matches()
