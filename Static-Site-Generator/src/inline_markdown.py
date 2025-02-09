@@ -8,8 +8,8 @@ DELIMITERS = {
     r"\_\_": TextType.BOLD,
     r"\*": TextType.ITALIC,
     r"\_": TextType.ITALIC,
-    r"\`\`\`": TextType.CODE,
-    r"\`": TextType.CODE,
+    #r"\`\`\`": TextType.CODE,
+    #r"\`": TextType.CODE,
     #"[]()": TextType.LINK,
     #"![]()": TextType.IMAGE,
 }
@@ -36,20 +36,20 @@ class InlineMarkdown():
             equality = True if self.text == other.text else False
         return equality
 
-    def get_markup_matches(self) -> list[tuple[int, int, str, TextType]]:
+    def get_markup_matches(self) -> list[tuple[int, int, TextNode]]:
         results = []
         for delimter, node_type in DELIMITERS.items():
             regex = fr"{delimter}(?P<node_text>.*?){delimter}"
             pattern = re.compile(pattern=regex, flags=re.DOTALL | re.MULTILINE)
             matches = pattern.finditer(self.text)
             results.extend(
-                (found.start(), found.end(), found.group("node_text"), node_type)
+                (found.start(), found.end(), TextNode(found.group("node_text"), node_type, None))
                 for found in matches
                 if found.group("node_text") != ""
             )
         return results
     
-    def get_indices(self, markup_nodes: list[tuple[int, int, str, TextType]]) -> list[tuple[int, int]]:
+    def get_indices(self, markup_nodes: list[tuple[int, int, TextNode]]) -> list[tuple[int, int]]:
         results = []
         results.append((0, markup_nodes[0][0]))
         results.extend(
@@ -59,22 +59,17 @@ class InlineMarkdown():
         results.append((markup_nodes[-1][1], len(self.text)))
         return results
     
-    def get_default_matches(self, indices: list[tuple[int, int]]) -> list[tuple[int, int, str, TextType]]:
+    def get_default_matches(self, indices: list[tuple[int, int]]) -> list[tuple[int, int, TextNode]]:
         results = [
-            (pair[0], pair[1], self.text[pair[0]:pair[1]], TextType.TEXT)
+            (pair[0], pair[1], TextNode(self.text[pair[0]:pair[1]], TextType.TEXT, None))
             for pair in indices
         ]
         return results
 
-    def to_text_nodes(self):
+    def to_text_nodes(self) -> list[TextNode]:
         markup_nodes = self.get_markup_matches()
         markup_nodes.sort(key=lambda x: x[0])
         indices = self.get_indices(markup_nodes)
         default_nodes = self.get_default_matches(indices)
         all_nodes = sorted(markup_nodes+default_nodes, key=lambda x: x[0])
-        return (
-            [
-                TextNode(node[2], node[3])
-                for node in all_nodes
-            ]
-        )
+        return ([node[2] for node in all_nodes])
