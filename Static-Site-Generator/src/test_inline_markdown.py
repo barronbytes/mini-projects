@@ -38,5 +38,17 @@ class TextInlineMarkdown(unittest.TestCase):
             ]
         )
 
+    def test_delim_code(self):
+        text = "Every coder writes `python print(\"Hello World.\")` at the start."
+        md = InlineMarkdown(text)
+        self.assertListEqual(
+            md.to_text_nodes(),
+            [
+                TextNode("Every coder writes ", TextType.TEXT),
+                TextNode("print(\"Hello World.\")", TextType.CODE, "python"),
+                TextNode(" at the start.", TextType.TEXT),
+            ]
+        )
+
 if __name__ == "__main__":
     unittest.main()

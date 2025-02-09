@@ -8,11 +8,16 @@ DELIMITERS = {
     r"\_\_": TextType.BOLD,
     r"\*": TextType.ITALIC,
     r"\_": TextType.ITALIC,
-    #r"\`\`\`": TextType.CODE,
-    #r"\`": TextType.CODE,
+    r"\`\`\`": TextType.CODE,
+    r"\`": TextType.CODE,
     #"[]()": TextType.LINK,
     #"![]()": TextType.IMAGE,
 }
+
+CODE_LANGUAGES = [
+    "html", "css", "javascript",
+    "python", "java",
+]
 
 class InlineMarkdown():
 
@@ -43,12 +48,23 @@ class InlineMarkdown():
             pattern = re.compile(pattern=regex, flags=re.DOTALL | re.MULTILINE)
             matches = pattern.finditer(self.text)
             results.extend(
+                self.map_to_code(found)
+                if node_type == TextType.CODE else
                 (found.start(), found.end(), TextNode(found.group("node_text"), node_type, None))
                 for found in matches
                 if found.group("node_text") != ""
             )
         return results
     
+    def map_to_code(self, found: re.Match[str]) -> tuple[int, int, TextNode]:
+        node_text = found.group("node_text")
+        language = next(
+            (lang for lang in CODE_LANGUAGES if node_text.lower().startswith(lang+" ")),
+            ""
+        )
+        node_text = node_text[len(language):].lstrip()
+        return (found.start(), found.end(), TextNode(node_text, TextType.CODE, language))
+
     def get_indices(self, markup_nodes: list[tuple[int, int, TextNode]]) -> list[tuple[int, int]]:
         results = []
         results.append((0, markup_nodes[0][0]))
