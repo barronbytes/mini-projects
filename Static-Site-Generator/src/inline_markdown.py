@@ -10,8 +10,8 @@ DELIMITERS = {
     r"\_": TextType.ITALIC,
     r"\`\`\`": TextType.CODE,
     r"\`": TextType.CODE,
-    #"[]()": TextType.LINK,
-    #"![]()": TextType.IMAGE,
+    r"\[(?P<link_text>.*?)\]\((?P<link_url>.*?)\)": TextType.LINK,
+    r"\!\[(?P<image_text>.*?)\]\((?P<image_url>.*?)\)": TextType.IMAGE,
 }
 
 CODE_LANGUAGES = [
@@ -43,20 +43,30 @@ class InlineMarkdown():
 
     def get_markup_matches(self) -> list[tuple[int, int, TextNode]]:
         results = []
-        for delimter, node_type in DELIMITERS.items():
-            regex = fr"{delimter}(?P<node_text>.*?){delimter}"
+        for delimiter, node_type in DELIMITERS.items():
+            if node_type in [TextType.LINK, TextType.IMAGE]:
+                regex = delimiter
+            else:
+                regex = fr"{delimiter}(?P<node_text>.*?){delimiter}"
+            
             pattern = re.compile(pattern=regex, flags=re.DOTALL | re.MULTILINE)
             matches = pattern.finditer(self.text)
-            results.extend(
-                self.map_to_code(found)
-                if node_type == TextType.CODE else
-                (found.start(), found.end(), TextNode(found.group("node_text"), node_type, None))
-                for found in matches
-                if found.group("node_text") != ""
-            )
+
+            for found in matches:
+                if node_type == TextType.LINK:
+                    results.append(self.map_for_link(found))
+                elif node_type == TextType.IMAGE:
+                    results.append(self.map_for_image(found))
+                else:
+                    node_text = found.group("node_text")
+                    if node_text != "":
+                        results.append(
+                            self.map_for_code(found) if node_type == TextType.CODE else
+                            (found.start(), found.end(), TextNode(node_text, node_type, None))
+                        )
         return results
     
-    def map_to_code(self, found: re.Match[str]) -> tuple[int, int, TextNode]:
+    def map_for_code(self, found: re.Match[str]) -> tuple[int, int, TextNode]:
         node_text = found.group("node_text")
         language = next(
             (lang for lang in CODE_LANGUAGES if node_text.lower().startswith(lang+" ")),
@@ -64,6 +74,16 @@ class InlineMarkdown():
         )
         node_text = node_text[len(language):].lstrip()
         return (found.start(), found.end(), TextNode(node_text, TextType.CODE, language))
+    
+    def map_for_link(self, found: re.Match[str]) -> tuple[int, int, TextNode]:
+        link_text = found.group("link_text")
+        link_url = found.group("link_url")
+        return (found.start(), found.end(), TextNode(link_text, TextType.LINK, link_url))
+
+    def map_for_image(self, found: re.Match[str]) -> tuple[int, int, TextNode]:
+        image_text = found.group("image_text")
+        image_url = found.group("image_url")
+        return (found.start(), found.end(), TextNode(image_text, TextType.IMAGE, image_url))
 
     def get_indices(self, markup_nodes: list[tuple[int, int, TextNode]]) -> list[tuple[int, int]]:
         results = []

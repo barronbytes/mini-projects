@@ -49,6 +49,32 @@ class TextInlineMarkdown(unittest.TestCase):
                 TextNode(" at the start.", TextType.TEXT),
             ]
         )
+    
+    def test_delim_link(self):
+        text = "I am a [boot.dev](https://boot.dev) member since **2024** and counting."
+        md = InlineMarkdown(text)
+        self.assertListEqual(
+            md.to_text_nodes(),
+            [
+                TextNode("I am a ", TextType.TEXT),
+                TextNode("boot.dev", TextType.LINK, "https://boot.dev"),
+                TextNode(" member since ", TextType.TEXT),
+                TextNode("2024", TextType.BOLD),
+                TextNode(" and counting.", TextType.TEXT),
+            ]
+        )
+    
+    def test_delim_image(self):
+        text = "Look at the ![bird](bird.png) in the air."
+        md = InlineMarkdown(text)
+        self.assertListEqual(
+            md.to_text_nodes(),
+            [
+                TextNode("Look at the ", TextType.TEXT),
+                TextNode("bird", TextType.IMAGE, "bird.png"),
+                TextNode(" in the air.", TextType.TEXT),
+            ]
+        )
 
 if __name__ == "__main__":
     unittest.main()

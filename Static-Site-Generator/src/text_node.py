@@ -38,9 +38,9 @@ class TextNode():
     # object string representation
     def __repr__(self) -> str:
         return (
-            f"TextNode(text=\"{self.text}\", text_type={self.text_type}, props={self.props})"
-            if self.text_type != TextType.CODE else
             f"TextNode(text=\"{self.text}\", text_type={self.text_type}, props=\"{self.props}\")"
+            if self.text_type in [TextType.CODE, TextType.LINK, TextType.IMAGE] else
+            f"TextNode(text=\"{self.text}\", text_type={self.text_type}, props={self.props})"
         )
 
     # equals
