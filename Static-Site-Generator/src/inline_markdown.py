@@ -1,5 +1,6 @@
 import re
 
+from typing import Iterator
 from text_node import TextNode, TextType
 
 
@@ -10,8 +11,8 @@ DELIMITERS = {
     r"\_": TextType.ITALIC,
     r"\`\`\`": TextType.CODE,
     r"\`": TextType.CODE,
-    r"\[(?P<link_text>.*?)\]\((?P<link_url>.*?)\)": TextType.LINK,
-    r"\!\[(?P<image_text>.*?)\]\((?P<image_url>.*?)\)": TextType.IMAGE,
+    r"(?<!\!)\[(?P<link_text>.*?)\]\((?P<link_url>.*?)\)": TextType.LINK, # Link Regex: [text](url), ignores preceding !
+    r"\!\[(?P<image_text>.*?)\]\((?P<image_url>.*?)\)": TextType.IMAGE, # Image Regex: ![text](url)
 }
 
 CODE_LANGUAGES = [
@@ -40,8 +41,48 @@ class InlineMarkdown():
         if isinstance(other, TextNode):
             equality = True if self.text == other.text else False
         return equality
+    
+    def find_matches(self) -> list[tuple[list[re.Match[str]], TextType]]:
+        matches = [
+            (self._create_patterns(delim, node_type), node_type)
+            for delim, node_type in DELIMITERS.items()
+        ]
+        matches_found = any(m[0] for m in matches)
+        return [] if not matches_found else matches
 
-    def get_markup_matches(self) -> list[tuple[int, int, TextNode]]:
+    def _create_patterns(self, delim: str, node_type: TextType) -> list[re.Match[str]]:
+        regex = (
+            delim if node_type in [TextType.LINK, TextType.IMAGE] else
+            fr"{delim}(?P<node_text>.*?){delim}"
+        )
+        pattern = re.compile(pattern=regex, flags=re.DOTALL | re.MULTILINE)
+        matches = list(pattern.finditer(self.text)) # return fresh list of matches instead of an exhausted iterator
+        return matches
+
+    def create_markup_nodes(self, matches: list[tuple[list[re.Match[str]], TextType]]) -> list[tuple[int, int, TextNode]]:
+        markup_nodes = []
+        for match_list, node_type in matches:
+            markup_nodes.extend(
+                self._map_for_image(m) if node_type == TextType.IMAGE else 
+                self._map_for_link(m) if node_type == TextType.LINK else 
+                None
+                for m in match_list
+            )
+        return markup_nodes
+
+    def _map_for_image(self, m: re.Match[str]) -> tuple[int, int, TextNode]:
+        image_text = m.group("image_text")
+        image_url = m.group("image_url")
+        return (m.start(), m.end(), TextNode(image_text, TextType.IMAGE, image_url))
+
+    def _map_for_link(self, m: re.Match[str]) -> tuple[int, int, TextNode]:
+        link_text = m.group("link_text")
+        link_url = m.group("link_url")
+        return (m.start(), m.end(), TextNode(link_text, TextType.LINK, link_url))
+
+
+
+    def get_markup_matchesss(self) -> list[tuple[int, int, TextNode]]:
         results = []
         for delimiter, node_type in DELIMITERS.items():
             if node_type in [TextType.LINK, TextType.IMAGE]:
@@ -74,16 +115,6 @@ class InlineMarkdown():
         )
         node_text = node_text[len(language):].lstrip()
         return (found.start(), found.end(), TextNode(node_text, TextType.CODE, language))
-    
-    def map_for_link(self, found: re.Match[str]) -> tuple[int, int, TextNode]:
-        link_text = found.group("link_text")
-        link_url = found.group("link_url")
-        return (found.start(), found.end(), TextNode(link_text, TextType.LINK, link_url))
-
-    def map_for_image(self, found: re.Match[str]) -> tuple[int, int, TextNode]:
-        image_text = found.group("image_text")
-        image_url = found.group("image_url")
-        return (found.start(), found.end(), TextNode(image_text, TextType.IMAGE, image_url))
 
     def get_indices(self, markup_nodes: list[tuple[int, int, TextNode]]) -> list[tuple[int, int]]:
         results = []
@@ -103,9 +134,11 @@ class InlineMarkdown():
         return results
 
     def to_text_nodes(self) -> list[TextNode]:
-        markup_nodes = self.get_markup_matches()
-        markup_nodes.sort(key=lambda x: x[0])
-        indices = self.get_indices(markup_nodes)
-        default_nodes = self.get_default_matches(indices)
-        all_nodes = sorted(markup_nodes+default_nodes, key=lambda x: x[0])
-        return ([node[2] for node in all_nodes])
+        matches = self.find_matches()
+        markup_nodes = [] if matches == [] else self.create_markup_nodes(matches)
+        return markup_nodes
+        #markup_nodes.sort(key=lambda x: x[0])
+        #indices = self.get_indices(markup_nodes)
+        #default_nodes = self.get_default_matches(indices)
+        #all_nodes = sorted(markup_nodes+default_nodes, key=lambda x: x[0])
+        #return ([node[2] for node in all_nodes])
