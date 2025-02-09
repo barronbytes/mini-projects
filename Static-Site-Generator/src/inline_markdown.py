@@ -36,7 +36,7 @@ class InlineMarkdown():
             equality = True if self.text == other.text else False
         return equality
 
-    def get_matches(self) -> list[tuple[int, int, str, TextType]]:
+    def get_markup_matches(self) -> list[tuple[int, int, str, TextType]]:
         results = []
         for delimter, node_type in DELIMITERS.items():
             regex = fr"{delimter}(?P<node_text>.*?){delimter}"
@@ -59,11 +59,16 @@ class InlineMarkdown():
         results.append((markup_nodes[-1][1], len(self.text)))
         return results
     
-    def get_default_nodes(self):
-        pass
+    def get_default_matches(self, indices: list[tuple[int, int]]) -> list[tuple[int, int, str, TextType]]:
+        results = [
+            (pair[0], pair[1], self.text[pair[0]:pair[1]], TextType.TEXT)
+            for pair in indices
+        ]
+        return results
 
     def to_text_nodes(self):
-        markup_nodes = self.get_matches()
+        markup_nodes = self.get_markup_matches()
         markup_nodes.sort(key=lambda x: x[0])
-        default_indices = self.get_indices(markup_nodes)
-        return markup_nodes, default_indices
+        indices = self.get_indices(markup_nodes)
+        default_nodes = self.get_default_matches(indices)
+        return markup_nodes, default_nodes
