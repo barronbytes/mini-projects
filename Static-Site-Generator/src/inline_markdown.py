@@ -71,4 +71,10 @@ class InlineMarkdown():
         markup_nodes.sort(key=lambda x: x[0])
         indices = self.get_indices(markup_nodes)
         default_nodes = self.get_default_matches(indices)
-        return markup_nodes, default_nodes
+        all_nodes = sorted(markup_nodes+default_nodes, key=lambda x: x[0])
+        return (
+            [
+                TextNode(node[2], node[3])
+                for node in all_nodes
+            ]
+        )
