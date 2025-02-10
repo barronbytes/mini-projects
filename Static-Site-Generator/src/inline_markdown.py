@@ -4,7 +4,7 @@ from typing import Iterator
 from text_node import TextNode, TextType
 
 
-DELIMITERS_INLINE = {
+INLINE_DELIMITERS = {
     r"\*\*": TextType.BOLD,
     r"\_\_": TextType.BOLD,
     r"\*": TextType.ITALIC,
@@ -45,7 +45,7 @@ class InlineMarkdown():
     def find_matches(self) -> list[tuple[list[re.Match[str]], TextType]]:
         matches = [
             (self._create_patterns(delim, node_type), node_type)
-            for delim, node_type in DELIMITERS_INLINE.items()
+            for delim, node_type in INLINE_DELIMITERS.items()
         ]
         matches_found = any(m[0] for m in matches)
         return [] if not matches_found else matches
