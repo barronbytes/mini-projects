@@ -1,4 +1,5 @@
 import re
+import itertools
 
 from enum import Enum
 
@@ -44,7 +45,11 @@ class BlockMarkdown():
         return equality
 
     def create_blocks(self):
-        blocks = self.text.strip()
+        regex = r"^\s*(.*?)\s*$|\n+"
+        pattern = re.compile(pattern=regex, flags=re.DOTALL | re.MULTILINE)
+        matches = list(pattern.findall(self.text))
+        matches = [m if m != "" else "\n" for m in matches]
+        return matches
 
     def to_blocks(self):
         blocks = self.create_blocks()
