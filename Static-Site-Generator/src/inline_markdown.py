@@ -38,7 +38,7 @@ class InlineMarkdown():
     # equals
     def __eq__(self, other: object) -> bool:
         equality = False
-        if isinstance(other, TextNode):
+        if isinstance(other, InlineMarkdown):
             equality = True if self.text == other.text else False
         return equality
     
