@@ -7,14 +7,14 @@ class TestBlockMarkdown(unittest.TestCase):
     
     def test_blocks(self):
         text = """
-            This is **bolded** paragraph
+            One
 
-                This is another paragraph with *italic* text and `code` here
-            This is the same paragraph on a new line
-            Something new
+                One One
+            Two Two
+            Three Three
 
-                * This is a list
-            * with items
+                One One One
+            Two Two Two
             """
         md = BlockMarkdown(text)
         print(md.create_blocks())

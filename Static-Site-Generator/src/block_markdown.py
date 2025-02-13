@@ -22,6 +22,7 @@ BLOCK_DELIMITERS = {
     r"6": BlockType.OL,
 }
 
+
 class BlockMarkdown():
 
     def __init__(self, text: str):
@@ -49,7 +50,12 @@ class BlockMarkdown():
         pattern = re.compile(pattern=regex, flags=re.DOTALL | re.MULTILINE)
         matches = list(pattern.findall(self.text))
         matches = [m if m != "" else "\n" for m in matches]
+        joined = [self._join_blocks("", i, matches) for i in range(len(matches))]
+        # matches = ['One', 'One One', '\n', 'Two Two', '\n', 'Three Three', 'One One One', '\n', 'Two Two Two']
         return matches
+
+    def _join_blocks(self, starter, i, matches):
+        return [starter + matches[i]] if matches[i] != "\n" else self._join_blocks(matches[i], i+1, matches)
 
     def to_blocks(self):
         blocks = self.create_blocks()
