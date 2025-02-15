@@ -45,17 +45,28 @@ class BlockMarkdown():
             equality = True if self.text == other.text else False
         return equality
 
-    def create_blocks(self):
+    def create_blocks(self) -> list[str]:
         regex = r"^\s*(.*?)\s*$|\n+"
         pattern = re.compile(pattern=regex, flags=re.DOTALL | re.MULTILINE)
         matches = list(pattern.findall(self.text))
-        matches = [m if m != "" else "\n" for m in matches]
-        joined = [self._join_blocks("", i, matches) for i in range(len(matches))]
-        # matches = ['One', 'One One', '\n', 'Two Two', '\n', 'Three Three', 'One One One', '\n', 'Two Two Two']
-        return matches
+        lines = [m if m != "" else "\n" for m in matches]
 
-    def _join_blocks(self, starter, i, matches):
-        return [starter + matches[i]] if matches[i] != "\n" else self._join_blocks(matches[i], i+1, matches)
+        is_one = 1 == len(lines)
+        i_min_max = [0] if is_one else [0, len(lines)-1]
+        i_breakers = [i for i in range(len(lines)) if lines[i] == "\n"] if "\n" in lines else None
+        i_spans = [(i-1, i+1) for i in i_breakers] if (not is_one) and (i_breakers is not None) else None
+        i_spans_final = []
+        if len(i_spans) is not None:
+            for i in range(len(i_spans)):
+                i_spans_final.append(
+                    (i_spans[i][0], i_spans[i][1])
+                )
+            #(i_spans[i][0], i_spans[i][1])
+            #(i_spans[i-1][0], i_spans[i][1]) if i > 0 and i_spans[i-1][1] == i_spans[i][0] else i_spans[i]
+            #for i in range(len(i_spans))
+            #if i == 0 or i_spans[i-1][1] != i_spans[i][0]
+        #] if i_spans is not None else None
+        return i_spans_final
 
     def to_blocks(self):
         blocks = self.create_blocks()
