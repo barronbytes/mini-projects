@@ -82,14 +82,10 @@ class BlockMarkdown():
         all_indices = [i for i in range(len(matches))]
         overlap_indices = self._find_overlap_indices(overlap)
         sole_indices = [i for i in all_indices if i not in overlap_indices]
-        blocks = [(i, matches[i]) for i in sole_indices]
-        if overlap:
-            blocks.extend(
-                (j,"".join(matches[j:k+1]))
-                for j, k in overlap
-            )
-        blocks_sorted = sorted(blocks, key=lambda x: x[0])
-        return blocks_sorted
+        sole_blocks = [(i, matches[i]) for i in sole_indices]
+        all_blocks = self._add_overlap_indices(overlap, matches, sole_blocks) if overlap else sole_blocks
+        sorted_blocks = sorted(all_blocks, key = lambda x: x[0])
+        return [block[1] for block in sorted_blocks]
 
     def _find_overlap_indices(self, overlap: list[tuple[int, int]] | None) -> list[int] | None:
         indices = []
@@ -100,8 +96,8 @@ class BlockMarkdown():
         ) if overlap else None
         return indices
     
-    def _add_overlap_indices(overlap: list[tuple[int, int]]) -> list[tuple[int, str]]:
-        pass
+    def _add_overlap_indices(self, overlap: list[tuple[int, int]], matches: list[str], blocks: list[tuple[int, str]]) -> list[tuple[int, str]]:
+        return blocks + [(j, "".join(matches[j:k+1])) for j, k in overlap]
 
     def to_blocks(self):
         blocks = self.create_blocks()
