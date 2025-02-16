@@ -5,21 +5,31 @@ from enum import Enum
 
 
 class BlockType(Enum):
-    PARAGRAPH = "paragraph",
-    HEADING = "heading",
-    CODE = "code",
-    QUOTE = "quote",
-    UL = "unordered list",
-    OL = "ordered list",
+    H1 = "header 1"
+    H2 = "header 2"
+    H3 = "header 3"
+    H4 = "header 4"
+    H5 = "header 5"
+    H6 = "header 6"
+    PARAGRAPH = "paragraph"
+    QUOTE = "quote"
+    UL = "unordered list"
+    OL = "ordered list"
+    CODE = "code"
 
 
 BLOCK_DELIMITERS = {
-    r"1": BlockType.PARAGRAPH,
-    r"2": BlockType.HEADING,
-    r"3": BlockType.CODE,    
-    r"4": BlockType.QUOTE,
-    r"5": BlockType.UL,
-    r"6": BlockType.OL,
+    r"^\#{1}(?!\*)\s(?P<block_text>.*)": BlockType.H1,
+    r"^\#{2}(?!\*)\s(?P<block_text>.*)": BlockType.H2,
+    r"^\#{3}(?!\*)\s(?P<block_text>.*)": BlockType.H3,
+    r"^\#{4}(?!\*)\s(?P<block_text>.*)": BlockType.H4,
+    r"^\#{5}(?!\*)\s(?P<block_text>.*)": BlockType.H5,
+    r"^\#{6}(?!\*)\s(?P<block_text>.*)": BlockType.H6,
+    r"2": BlockType.QUOTE,
+    r"3": BlockType.UL,
+    r"4": BlockType.OL,
+    r"^\s*`{3}(?P<block_text>[\s\S]*?)`{3}\s*$": BlockType.CODE,
+    r"^\s*`{1}(?P<block_text>[\s\S]*?)`{1}\s*$": BlockType.CODE,
 }
 
 
@@ -100,6 +110,18 @@ class BlockMarkdown():
                     overlap: list[tuple[int, int]], matches: list[str],
                     blocks: list[tuple[int, str]]) -> list[tuple[int, str]]:
         return blocks + [(j, "".join(matches[j:k+1])) for j, k in overlap]
+
+    @staticmethod
+    def block_type(text: str) -> tuple[str, BlockType]:
+        match_result = (text, BlockType.PARAGRAPH) # default setting
+        for delim, block_type in BLOCK_DELIMITERS.items():
+            regex = delim
+            pattern = re.compile(pattern=regex, flags=re.DOTALL | re.MULTILINE)
+            found = re.match(pattern=pattern, string=text)
+            if found:
+                match_result = (found.group("block_text"), block_type)
+                break
+        return match_result
 
     def to_blocks(self):
         blocks = self.create_blocks()

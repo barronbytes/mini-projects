@@ -1,11 +1,11 @@
 import unittest
 
-from block_markdown import BlockMarkdown
+from block_markdown import BlockMarkdown, BlockType
 
 
 class TestBlockMarkdown(unittest.TestCase):
 
-    def test_md_empty(self):
+    def test_create_blocks_empty(self):
         text = """
         """
         md = BlockMarkdown(text)
@@ -14,7 +14,7 @@ class TestBlockMarkdown(unittest.TestCase):
             ["\n"]
         )
 
-    def test_md_block1(self):
+    def test_create_blocks_1(self):
         text = """
             One
         """
@@ -24,7 +24,7 @@ class TestBlockMarkdown(unittest.TestCase):
             ["One"]
         )
 
-    def test_md_block2(self):
+    def test_create_blocks_2(self):
         text = """
             One
             Two
@@ -37,7 +37,7 @@ class TestBlockMarkdown(unittest.TestCase):
             ["One\nTwo", "One One"]
         )
     
-    def test_block5(self):
+    def test_create_blocks_5(self):
         text = """
             Wake Up
             Make Cereal
@@ -60,6 +60,46 @@ class TestBlockMarkdown(unittest.TestCase):
             md.create_blocks(),
             ['Wake Up\nMake Cereal', '* Milk\n* Cereal\n* Banana', 'What Next?\nGet To Work', '* Get Dressed\n* Drive To Work.', 'Wait To Leave Home.']
         )
-        
+
+    def test_block_type_h1(self):
+        text = "# Pay Attention"
+        self.assertEqual(
+            BlockMarkdown.block_type(text),
+            ("Pay Attention", BlockType.H1)
+        )
+
+    def test_block_type_h4(self):
+        text = "#### Pay Attention"
+        self.assertEqual(
+            BlockMarkdown.block_type(text),
+            ("Pay Attention", BlockType.H4)
+        )
+
+    def test_block_type_code(self):
+        text = "`print(\"hello\")`"
+        self.assertEqual(
+            BlockMarkdown.block_type(text),
+            ("print(\"hello\")", BlockType.CODE)
+        )
+
+    def test_block_type_code_multiline(self):
+        text = """
+        ```python
+        print(\"world\")
+        ```
+        """
+        self.assertEqual(
+            BlockMarkdown.block_type(text),
+            ("python\n        print(\"world\")\n        ", BlockType.CODE)
+        )
+
+
+    def test_block_type_code_paragraph(self):
+        text = "hello folks"
+        self.assertEqual(
+            BlockMarkdown.block_type(text),
+            ("hello folks", BlockType.PARAGRAPH)
+        )
+
 if __name__ == "__main__":
     unittest.main()
