@@ -25,9 +25,10 @@ BLOCK_DELIMITERS = {
     r"^\#{4}(?!\*)\s(?P<block_text>.*)": BlockType.H4,
     r"^\#{5}(?!\*)\s(?P<block_text>.*)": BlockType.H5,
     r"^\#{6}(?!\*)\s(?P<block_text>.*)": BlockType.H6,
-    r"2": BlockType.QUOTE,
-    r"3": BlockType.UL,
-    r"4": BlockType.OL,
+    r"^\>(?!\>)\s(?P<block_text>.*)": BlockType.QUOTE,
+    r"^\*{1}(?!\*)\s(?P<block_text>.*)": BlockType.UL,
+    r"^\-{1}(?!\-)\s(?P<block_text>.*)": BlockType.UL,
+    r"^\d+\.\s(?P<block_text>.*)": BlockType.OL,
     r"^\s*`{3}(?P<block_text>[\s\S]*?)`{3}\s*$": BlockType.CODE,
     r"^\s*`{1}(?P<block_text>[\s\S]*?)`{1}\s*$": BlockType.CODE,
 }

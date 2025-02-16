@@ -75,6 +75,34 @@ class TestBlockMarkdown(unittest.TestCase):
             ("Pay Attention", BlockType.H4)
         )
 
+    def test_block_type_code_quote(self):
+        text = "> Progress is progress."
+        self.assertEqual(
+            BlockMarkdown.block_type(text),
+            ("Progress is progress.", BlockType.QUOTE)
+        )
+
+    def test_block_type_code_ul_bullet(self):
+        text = "* Yogurt"
+        self.assertEqual(
+            BlockMarkdown.block_type(text),
+            ("Yogurt", BlockType.UL)
+        )
+
+    def test_block_type_code_ul_dash(self):
+        text = "- Yogurt"
+        self.assertEqual(
+            BlockMarkdown.block_type(text),
+            ("Yogurt", BlockType.UL)
+        )
+
+    def test_block_type_code_ol(self):
+        text = "1. Yams"
+        self.assertEqual(
+            BlockMarkdown.block_type(text),
+            ("Yams", BlockType.OL)
+        )
+
     def test_block_type_code(self):
         text = "`print(\"hello\")`"
         self.assertEqual(
@@ -93,13 +121,13 @@ class TestBlockMarkdown(unittest.TestCase):
             ("python\n        print(\"world\")\n        ", BlockType.CODE)
         )
 
-
     def test_block_type_code_paragraph(self):
         text = "hello folks"
         self.assertEqual(
             BlockMarkdown.block_type(text),
             ("hello folks", BlockType.PARAGRAPH)
         )
+
 
 if __name__ == "__main__":
     unittest.main()
