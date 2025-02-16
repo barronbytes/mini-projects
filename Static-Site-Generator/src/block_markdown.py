@@ -79,7 +79,7 @@ class BlockMarkdown():
                     matches: list[str],
                     min_max: list[int],
                     overlap: list[tuple[int, int]] | None) -> list[str]:
-        all_indices = [i for i in range(len(matches))]
+        all_indices = [i for i in range(min_max[0], min_max[1]+1)]
         overlap_indices = self._find_overlap_indices(overlap)
         sole_indices = [i for i in all_indices if i not in overlap_indices]
         sole_blocks = [(i, matches[i]) for i in sole_indices]
