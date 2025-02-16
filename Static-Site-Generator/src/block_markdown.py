@@ -96,7 +96,9 @@ class BlockMarkdown():
         ) if overlap else None
         return indices
     
-    def _add_overlap_indices(self, overlap: list[tuple[int, int]], matches: list[str], blocks: list[tuple[int, str]]) -> list[tuple[int, str]]:
+    def _add_overlap_indices(self,
+                    overlap: list[tuple[int, int]], matches: list[str],
+                    blocks: list[tuple[int, str]]) -> list[tuple[int, str]]:
         return blocks + [(j, "".join(matches[j:k+1])) for j, k in overlap]
 
     def to_blocks(self):
