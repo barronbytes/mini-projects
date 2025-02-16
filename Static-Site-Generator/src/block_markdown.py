@@ -49,7 +49,8 @@ class BlockMarkdown():
         matches = self._create_patterns()
         min_max, span = self._find_indices(matches)
         overlap = self._find_overlap(span)
-        return min_max, overlap
+        blocks = self._join_blocks(matches, min_max, overlap)
+        return blocks
 
     def _create_patterns(self) -> list[str]:
         regex = r"^\s*(.*?)\s*$|\n+"
@@ -73,6 +74,24 @@ class BlockMarkdown():
                 if i == 0 or span[i][0] != span[i-1][1]
             ] if span else None
         )
+
+    def _join_blocks(self, 
+                    matches: list[str],
+                    min_max: list[int],
+                    overlap: list[tuple[int, int]] | None) -> list[str]:
+        all_indices = [i for i in range(len(matches))]
+        overlap_indices = self._find_overlap_indices(overlap)
+        sole_indices = [i for i in all_indices if i not in overlap_indices]
+        return sole_indices
+
+    def _find_overlap_indices(self, overlap: list[tuple[int, int]] | None) -> list[int] | None:
+        indices = []
+        indices.extend(
+            n
+            for j, k in overlap
+            for n in range(j, k+1) 
+        ) if overlap else None
+        return indices
 
     def to_blocks(self):
         blocks = self.create_blocks()
