@@ -76,31 +76,31 @@ class TestBlockMarkdown(unittest.TestCase):
         )
 
     def test_block_type_code_quote(self):
-        text = "> Progress is progress."
+        text = "> Progress is progress\n> Do not quit."
         self.assertEqual(
             BlockMarkdown.block_type(text),
-            ("Progress is progress.", BlockType.QUOTE)
+            (["Progress is progress", "Do not quit."], BlockType.QUOTE)
         )
 
     def test_block_type_code_ul_bullet(self):
-        text = "* Yogurt"
+        text = "* Yogurt\n* Oatmeal"
         self.assertEqual(
             BlockMarkdown.block_type(text),
-            ("Yogurt", BlockType.UL)
+            (["Yogurt", "Oatmeal"], BlockType.UL)
         )
 
     def test_block_type_code_ul_dash(self):
-        text = "- Yogurt"
+        text = "- Yogurt\n- Oatmeal"
         self.assertEqual(
             BlockMarkdown.block_type(text),
-            ("Yogurt", BlockType.UL)
+            (["Yogurt", "Oatmeal"], BlockType.UL)
         )
 
     def test_block_type_code_ol(self):
-        text = "1. Yams"
+        text = "1. Yams\n2. Beef"
         self.assertEqual(
             BlockMarkdown.block_type(text),
-            ("Yams", BlockType.OL)
+            (["Yams", "Beef"], BlockType.OL)
         )
 
     def test_block_type_code(self):

@@ -113,14 +113,22 @@ class BlockMarkdown():
         return blocks + [(j, "".join(matches[j:k+1])) for j, k in overlap]
 
     @staticmethod
-    def block_type(text: str) -> tuple[str, BlockType]:
+    def block_type(text: str) -> tuple[str | list[str], BlockType]:
         match_result = (text, BlockType.PARAGRAPH) # default setting
         for delim, block_type in BLOCK_DELIMITERS.items():
             regex = delim
             pattern = re.compile(pattern=regex, flags=re.DOTALL | re.MULTILINE)
             found = re.match(pattern=pattern, string=text)
-            if found:
+            if found and block_type not in [BlockType.QUOTE, BlockType.UL, BlockType.OL]:
                 match_result = (found.group("block_text"), block_type)
+                break
+            elif found and block_type in [BlockType.QUOTE, BlockType.UL, BlockType.OL]:
+                splits = text.split("\n")
+                found_items = [re.match(pattern=pattern, string=item) for item in splits]
+                is_match = all(found_items)
+                if is_match:
+                    items = [item.group("block_text") for item in found_items]
+                    match_result = (items, block_type)
                 break
         return match_result
 
