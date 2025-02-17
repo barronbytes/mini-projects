@@ -128,15 +128,15 @@ class TestBlockMarkdown(unittest.TestCase):
             BlockType.PARAGRAPH
         )
 
-    def test_map_value_paragraph(self):
-        text = """
+    def test_map_paragraph(self):
+        block_md_text = """
             I am *almost* done.
 
             Not
             really.
         """
-        md = BlockMarkdown(text)
-        print(md.to_html_nodes()[1])
+        mdd = BlockMarkdown(block_md_text)
+        print(mdd.to_html_nodes())
         pass
 
 

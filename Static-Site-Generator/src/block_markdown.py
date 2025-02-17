@@ -2,23 +2,24 @@ import re
 from typing import Optional
 
 from enum import Enum
+from text_node import TextNode
 from parent_node import ParentNode
 from leaf_node import LeafNode
 from inline_markdown import InlineMarkdown
 
 
 class BlockType(Enum):
-    H1 = ["h1", "_map_value_heading"]
-    H2 = ["h2", "_map_value_heading"]
-    H3 = ["h3", "_map_value_heading"]
-    H4 = ["h4", "_map_value_heading"]
-    H5 = ["h5", "_map_value_heading"]
-    H6 = ["h6", "_map_value_heading"]
-    PARAGRAPH = ["p", "_map_value_paragraph"]
-    QUOTE = ["q", "_map_value_quote"]
-    UL = ["ul", "_map_value_unordered_list"]
-    OL = ["ol", "_map_value_ordered_list"]
-    CODE = ["pre", "_map_value_code"]
+    H1 = ["h1", "_map_text_heading"]
+    H2 = ["h2", "_map_text_heading"]
+    H3 = ["h3", "_map_text_heading"]
+    H4 = ["h4", "_map_text_heading"]
+    H5 = ["h5", "_map_text_heading"]
+    H6 = ["h6", "_map_text_heading"]
+    PARAGRAPH = ["p", "_map_text_paragraph"]
+    QUOTE = ["q", "_map_text_quote"]
+    UL = ["ul", "_map_text_unordered_list"]
+    OL = ["ol", "_map_text_ordered_list"]
+    CODE = ["pre", "_map_text_code"]
 
 
 BLOCK_DELIMITERS = {
@@ -136,20 +137,20 @@ class BlockMarkdown():
 
     @staticmethod    
     def create_leaf_nodes(blocks: list[str], types: list[BlockType]) -> list[LeafNode]:
-        # Convert block type string values to actual function references
-        maps = [getattr(BlockMarkdown, t.value[1]) for t in types]
-        values = [map_func(text) for map_func, text in zip(maps, blocks)]
-        #text_nodes = [InlineMarkdown(text).to_text_nodes() for text in values]
-        #print(text_nodes)
-        return [LeafNode(t.value[0], value) for t, value in zip(types, values)]
+        maps = [getattr(BlockMarkdown, t.value[1]) for t in types] # convert block type string values to actual function references
+        block_text = [map_func(text) for map_func, text in zip(maps, blocks)]
+        inline_md = [InlineMarkdown(text) for text in block_text]
+        text_nodes = [md.to_text_nodes() for md in inline_md]
+        #leaf_nodes = [node.to_leaf_node() for nodes in text_nodes for node in nodes]
+        #html = [node.to_html() for node in leaf_nodes]
+        return len(text_nodes)
 
     @staticmethod
-    def _map_value_paragraph(text: str) -> list[str]:
+    def _map_text_paragraph(text: str) -> list[str]:
         return text.replace("\n", " ")
 
     def to_html_nodes(self):
         blocks = self.create_blocks()
         types = [BlockMarkdown.block_type(b) for b in blocks]
         leaves = BlockMarkdown.create_leaf_nodes(blocks, types)
-        
         return leaves
