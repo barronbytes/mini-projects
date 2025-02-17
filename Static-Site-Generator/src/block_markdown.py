@@ -16,7 +16,7 @@ class BlockType(Enum):
     H5 = ["h5", "_map_text_heading"]
     H6 = ["h6", "_map_text_heading"]
     PARAGRAPH = ["p", "_map_text_paragraph"]
-    QUOTE = ["q", "_map_text_quote"]
+    QUOTE = ["blockquote", "_map_text_quote"]
     UL = ["ul", "_map_text_unordered_list"]
     OL = ["ol", "_map_text_ordered_list"]
     CODE = ["pre", "_map_text_code"]
@@ -136,21 +136,35 @@ class BlockMarkdown():
         return match_result
 
     @staticmethod    
-    def create_leaf_nodes(blocks: list[str], types: list[BlockType]) -> list[LeafNode]:
-        maps = [getattr(BlockMarkdown, t.value[1]) for t in types] # convert block type string values to actual function references
-        block_text = [map_func(text) for map_func, text in zip(maps, blocks)]
-        inline_md = [InlineMarkdown(text) for text in block_text]
-        text_nodes = [md.to_text_nodes() for md in inline_md]
-        leaf_nodes = [[node.to_leaf_node() for node in nodes] for nodes in text_nodes]
-        #html = [node.to_html() for node in leaf_nodes]
-        return leaf_nodes
+    def create_block_text(blocks: list[str], types: list[BlockType]) -> list[list[LeafNode]]:
+        map_func = [getattr(BlockMarkdown, t.value[1]) for t in types] # convert block type string values to actual function references
+        block_text = [map_func(text) for map_func, text in zip(map_func, blocks)]
+        #inline_md = [InlineMarkdown(text) for text in block_text]
+        #text_nodes = [md.to_text_nodes() for md in inline_md]
+        #leaf_nodes = [[node.to_leaf_node() for node in nodes] for nodes in text_nodes]
+        return block_text
 
     @staticmethod
     def _map_text_paragraph(text: str) -> list[str]:
         return text.replace("\n", " ")
 
+    @staticmethod
+    def _map_text_heading(text: str) -> list[str]:
+        return re.sub(r"^#{1,6}\s", "", text)
+    
+    @staticmethod
+    def _map_text_quote(text: str) -> list[str]:
+        text = re.sub(r"\>\s", "", text)
+        return re.sub(r"\n", "<br>", text)
+
+    @staticmethod
+    def _map_text_unordered_list(text: str):
+        return "1"
+
     def to_html_nodes(self):
         blocks = self.create_blocks()
         types = [BlockMarkdown.block_type(b) for b in blocks]
-        leaves = BlockMarkdown.create_leaf_nodes(blocks, types)
-        return leaves
+        block_text = BlockMarkdown.create_block_text(blocks, types)
+        #leaf_text = [[node.to_html() for node in nodes] for nodes in leaves]
+
+        return f"\n{blocks}\n\n{types}\n\n{block_text}"

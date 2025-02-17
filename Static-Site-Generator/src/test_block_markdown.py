@@ -130,13 +130,14 @@ class TestBlockMarkdown(unittest.TestCase):
 
     def test_map_paragraph(self):
         block_md_text = """
-            I am *almost* done.
+            * I am *almost* done.
 
-            Not
-            really.
+            * Not
+            * even
+            * close.
         """
-        mdd = BlockMarkdown(block_md_text)
-        print(mdd.to_html_nodes())
+        md = BlockMarkdown(block_md_text)
+        print(md.to_html_nodes())
         pass
 
 
