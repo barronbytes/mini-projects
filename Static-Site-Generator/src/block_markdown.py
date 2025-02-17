@@ -141,9 +141,9 @@ class BlockMarkdown():
         block_text = [map_func(text) for map_func, text in zip(maps, blocks)]
         inline_md = [InlineMarkdown(text) for text in block_text]
         text_nodes = [md.to_text_nodes() for md in inline_md]
-        #leaf_nodes = [node.to_leaf_node() for nodes in text_nodes for node in nodes]
+        leaf_nodes = [[node.to_leaf_node() for node in nodes] for nodes in text_nodes]
         #html = [node.to_html() for node in leaf_nodes]
-        return text_nodes
+        return leaf_nodes
 
     @staticmethod
     def _map_text_paragraph(text: str) -> list[str]:
