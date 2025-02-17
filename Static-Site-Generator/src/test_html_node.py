@@ -28,5 +28,6 @@ class TestHTMLNode(unittest.TestCase):
         expected_html = ""
         self.assertEqual(node.props_to_html(), expected_html)
 
+
 if __name__ == "__main__":
     unittest.main()

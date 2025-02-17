@@ -48,5 +48,6 @@ class TestTextNode(unittest.TestCase):
         expected_html = "<img src=\"boot_dev.png\" alt=\"Boot Dev\"></img>"
         self.assertEqual(node.to_leaf_node().to_html(), expected_html)
 
+
 if __name__ == "__main__":
     unittest.main()

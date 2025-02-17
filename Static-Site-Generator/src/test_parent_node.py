@@ -49,5 +49,6 @@ class TestParentNode(unittest.TestCase):
         expected_html = "<div class=\"grid\"><ul class=\"col-3\"><li>get started</li></ul></div>"
         self.assertEqual(parent_node.to_html(), expected_html)
 
+
 if __name__ == "__main__":
     unittest.main()

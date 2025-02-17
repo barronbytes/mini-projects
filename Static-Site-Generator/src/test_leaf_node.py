@@ -24,5 +24,6 @@ class TestLeafNode(unittest.TestCase):
         expected_HTML = '<a href="https://www.google.com">Sign Up!</a>'
         self.assertEqual(node.to_html(), expected_HTML)      
 
+
 if __name__ == "__main__":
     unittest.main()
