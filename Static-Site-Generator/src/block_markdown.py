@@ -2,20 +2,22 @@ import re
 from typing import Optional
 
 from enum import Enum
+from parent_node import ParentNode
+from leaf_node import LeafNode
 
 
 class BlockType(Enum):
-    H1 = "header 1"
-    H2 = "header 2"
-    H3 = "header 3"
-    H4 = "header 4"
-    H5 = "header 5"
-    H6 = "header 6"
-    PARAGRAPH = "paragraph"
-    QUOTE = "quote"
-    UL = "unordered list"
-    OL = "ordered list"
-    CODE = "code"
+    H1 = ["h1", "_map_heading_values"]
+    H2 = ["h2", "_map_heading_values"]
+    H3 = ["h3", "_map_heading_values"]
+    H4 = ["h4", "_map_heading_values"]
+    H5 = ["h5", "_map_heading_values"]
+    H6 = ["h6", "_map_heading_values"]
+    PARAGRAPH = ["p", "_map_paragraph_values"]
+    QUOTE = ["q", "_map_quote_values"]
+    UL = ["ul", "_map_unordered_values"]
+    OL = ["ol", "_map_ordered_values"]
+    CODE = ["pre", "_map_code_values"]
 
 
 BLOCK_DELIMITERS = {
@@ -44,6 +46,7 @@ class BlockMarkdown():
             text (str): String of text.
         '''
         self.text = text
+        self.md_blocks = []
 
     # object string representation
     def __repr__(self) -> str:
@@ -113,24 +116,35 @@ class BlockMarkdown():
         return blocks + [(j, "".join(matches[j:k+1])) for j, k in overlap]
 
     @staticmethod
-    def block_type(text: str) -> tuple[str | list[str], BlockType]:
-        match_result = (text, BlockType.PARAGRAPH) # default setting
+    def block_type(text: str) -> BlockType:
+        match_result = BlockType.PARAGRAPH # default setting
         for delim, block_type in BLOCK_DELIMITERS.items():
             regex = delim
             pattern = re.compile(pattern=regex, flags=re.DOTALL | re.MULTILINE)
             found = re.match(pattern=pattern, string=text)
             if found and block_type not in [BlockType.QUOTE, BlockType.UL, BlockType.OL]:
-                match_result = (found.group("block_text"), block_type)
+                match_result = block_type
                 break
             elif found and block_type in [BlockType.QUOTE, BlockType.UL, BlockType.OL]:
                 splits = text.split("\n")
                 found_items = [re.match(pattern=pattern, string=item) for item in splits]
                 is_match = all(found_items)
-                if is_match:
-                    items = [item.group("block_text") for item in found_items]
-                    match_result = (items, block_type)
+                match_result = block_type if is_match else BlockType.PARAGRAPH
                 break
         return match_result
+    
+    @staticmethod
+    def create_leaf_nodes(blocks: list[str], block_types: list[BlockType]) -> list[LeafNode]:
+        print(block_types[0].value[1])
 
-    def to_blocks(self):
+    @staticmethod
+    def _map_paragraph_values():
+        pass
+
+    def to_html_nodes(self):
         blocks = self.create_blocks()
+        block_types = [BlockMarkdown.block_type(b) for b in blocks]
+        anchor = "div"
+        leaves = BlockMarkdown.create_leaf_nodes(blocks, block_types)
+        
+        return blocks, block_types

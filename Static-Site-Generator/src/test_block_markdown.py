@@ -65,49 +65,49 @@ class TestBlockMarkdown(unittest.TestCase):
         text = "# Pay Attention"
         self.assertEqual(
             BlockMarkdown.block_type(text),
-            ("Pay Attention", BlockType.H1)
+            BlockType.H1
         )
 
     def test_block_type_h4(self):
         text = "#### Pay Attention"
         self.assertEqual(
             BlockMarkdown.block_type(text),
-            ("Pay Attention", BlockType.H4)
+            BlockType.H4
         )
 
-    def test_block_type_code_quote(self):
+    def test_block_type_quote(self):
         text = "> Progress is progress\n> Do not quit."
         self.assertEqual(
             BlockMarkdown.block_type(text),
-            (["Progress is progress", "Do not quit."], BlockType.QUOTE)
+            BlockType.QUOTE
         )
 
-    def test_block_type_code_ul_bullet(self):
+    def test_block_type_ul_bullet(self):
         text = "* Yogurt\n* Oatmeal"
         self.assertEqual(
             BlockMarkdown.block_type(text),
-            (["Yogurt", "Oatmeal"], BlockType.UL)
+            BlockType.UL
         )
 
-    def test_block_type_code_ul_dash(self):
+    def test_block_type_ul_dash(self):
         text = "- Yogurt\n- Oatmeal"
         self.assertEqual(
             BlockMarkdown.block_type(text),
-            (["Yogurt", "Oatmeal"], BlockType.UL)
+            BlockType.UL
         )
 
-    def test_block_type_code_ol(self):
+    def test_block_type_ol(self):
         text = "1. Yams\n2. Beef"
         self.assertEqual(
             BlockMarkdown.block_type(text),
-            (["Yams", "Beef"], BlockType.OL)
+            BlockType.OL
         )
 
     def test_block_type_code(self):
         text = "`print(\"hello\")`"
         self.assertEqual(
             BlockMarkdown.block_type(text),
-            ("print(\"hello\")", BlockType.CODE)
+            BlockType.CODE
         )
 
     def test_block_type_code_multiline(self):
@@ -118,15 +118,26 @@ class TestBlockMarkdown(unittest.TestCase):
         """
         self.assertEqual(
             BlockMarkdown.block_type(text),
-            ("python\n        print(\"world\")\n        ", BlockType.CODE)
+            BlockType.CODE
         )
 
     def test_block_type_code_paragraph(self):
         text = "hello folks"
         self.assertEqual(
             BlockMarkdown.block_type(text),
-            ("hello folks", BlockType.PARAGRAPH)
+            BlockType.PARAGRAPH
         )
+
+    def test_html_paragraphs(self):
+        text = """
+            Almost done.
+
+            Not.
+            Really.
+        """
+        md = BlockMarkdown(text)
+        print(md.to_html_nodes())
+        pass
 
 
 if __name__ == "__main__":
