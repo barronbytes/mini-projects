@@ -158,8 +158,16 @@ class BlockMarkdown():
         return re.sub(r"\n", "<br>", text)
 
     @staticmethod
-    def _map_text_unordered_list(text: str):
-        return "1"
+    def _map_text_unordered_list(text: str) -> list[str]:
+        text = re.sub(r"^[*-]\s", "", text)
+        text = re.sub(r"\n[*-]\s", "</li><li>", text)
+        return f"<li>{text}</li>"
+
+    @staticmethod
+    def _map_text_ordered_list(text: str) -> list[str]:
+        text = re.sub(r"^\d+\.\s", "", text)
+        text = re.sub(r"\n\d+\.\s", "</li><li>", text)
+        return f"<li>{text}</li>"
 
     def to_html_nodes(self):
         blocks = self.create_blocks()
