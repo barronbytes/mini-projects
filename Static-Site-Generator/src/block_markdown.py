@@ -4,20 +4,21 @@ from typing import Optional
 from enum import Enum
 from parent_node import ParentNode
 from leaf_node import LeafNode
+from inline_markdown import InlineMarkdown
 
 
 class BlockType(Enum):
-    H1 = ["h1", "_map_heading_values"]
-    H2 = ["h2", "_map_heading_values"]
-    H3 = ["h3", "_map_heading_values"]
-    H4 = ["h4", "_map_heading_values"]
-    H5 = ["h5", "_map_heading_values"]
-    H6 = ["h6", "_map_heading_values"]
-    PARAGRAPH = ["p", "_map_paragraph_values"]
-    QUOTE = ["q", "_map_quote_values"]
-    UL = ["ul", "_map_unordered_values"]
-    OL = ["ol", "_map_ordered_values"]
-    CODE = ["pre", "_map_code_values"]
+    H1 = ["h1", "_map_value_heading"]
+    H2 = ["h2", "_map_value_heading"]
+    H3 = ["h3", "_map_value_heading"]
+    H4 = ["h4", "_map_value_heading"]
+    H5 = ["h5", "_map_value_heading"]
+    H6 = ["h6", "_map_value_heading"]
+    PARAGRAPH = ["p", "_map_value_paragraph"]
+    QUOTE = ["q", "_map_value_quote"]
+    UL = ["ul", "_map_value_unordered_list"]
+    OL = ["ol", "_map_value_ordered_list"]
+    CODE = ["pre", "_map_value_code"]
 
 
 BLOCK_DELIMITERS = {
@@ -45,18 +46,18 @@ class BlockMarkdown():
         Parameters:
             text (str): String of text.
         '''
-        self.text = text
-        self.md_blocks = []
+        self.md_text = text
+        self.md_anchor = "div"
 
     # object string representation
     def __repr__(self) -> str:
-        return f"BlockMarkdown(text=\"{self.text}\")"
+        return f"BlockMarkdown(text=\"{self.md_text}\")"
     
     # equals
     def __eq__(self, other: object) -> bool:
         equality = False
         if isinstance(other, BlockMarkdown):
-            equality = True if self.text == other.text else False
+            equality = True if self.md_text == other.text else False
         return equality
 
     def create_blocks(self) -> list[str]:
@@ -69,7 +70,7 @@ class BlockMarkdown():
     def _create_patterns(self) -> list[str]:
         regex = r"^\s*(.*?)\s*$|\n+"
         pattern = re.compile(pattern=regex, flags=re.DOTALL | re.MULTILINE)
-        matches = list(pattern.findall(self.text))
+        matches = list(pattern.findall(self.md_text))
         return [m if m != "" else "\n" for m in matches]
     
     def _find_indices(self, matches: list[str]) -> tuple[list[int], Optional[list[tuple[int, int]]]]:
@@ -132,19 +133,23 @@ class BlockMarkdown():
                 match_result = block_type if is_match else BlockType.PARAGRAPH
                 break
         return match_result
-    
-    @staticmethod
-    def create_leaf_nodes(blocks: list[str], block_types: list[BlockType]) -> list[LeafNode]:
-        print(block_types[0].value[1])
+
+    @staticmethod    
+    def create_leaf_nodes(blocks: list[str], types: list[BlockType]) -> list[LeafNode]:
+        # Convert block type string values to actual function references
+        maps = [getattr(BlockMarkdown, t.value[1]) for t in types]
+        values = [map_func(text) for map_func, text in zip(maps, blocks)]
+        #text_nodes = [InlineMarkdown(text).to_text_nodes() for text in values]
+        #print(text_nodes)
+        return [LeafNode(t.value[0], value) for t, value in zip(types, values)]
 
     @staticmethod
-    def _map_paragraph_values():
-        pass
+    def _map_value_paragraph(text: str) -> list[str]:
+        return text.replace("\n", " ")
 
     def to_html_nodes(self):
         blocks = self.create_blocks()
-        block_types = [BlockMarkdown.block_type(b) for b in blocks]
-        anchor = "div"
-        leaves = BlockMarkdown.create_leaf_nodes(blocks, block_types)
+        types = [BlockMarkdown.block_type(b) for b in blocks]
+        leaves = BlockMarkdown.create_leaf_nodes(blocks, types)
         
-        return blocks, block_types
+        return leaves
