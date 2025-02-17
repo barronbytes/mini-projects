@@ -127,9 +127,13 @@ class InlineMarkdown():
 
     def to_text_nodes(self) -> list[TextNode]:
         matches = self.find_matches()
-        group_nodes = [] if matches == [] else self.create_group_nodes(matches)
-        group_nodes.sort(key=lambda x: x[0])
-        indices = self.get_indices(group_nodes)
-        default_nodes = self.create_default_nodes(indices)
-        all_nodes = sorted(group_nodes + default_nodes, key=lambda x: x[0])
-        return ([node[2] for node in all_nodes])
+        all_nodes = []
+        if matches:
+            group_nodes = self.create_group_nodes(matches)
+            group_nodes.sort(key=lambda x: x[0])
+            indices = self.get_indices(group_nodes)
+            default_nodes = self.create_default_nodes(indices)
+            all_nodes = sorted(group_nodes + default_nodes, key=lambda x: x[0])
+        else:
+            all_nodes.append(TextNode(self.text, TextType.TEXT))
+        return ([node[2] for node in all_nodes] if matches else all_nodes)

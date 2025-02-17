@@ -94,6 +94,16 @@ class TextInlineMarkdown(unittest.TestCase):
             ]
         )
 
+    def test_nodes_only_text(self):
+        text = "No markup included."
+        md = InlineMarkdown(text)
+        self.assertListEqual(
+            md.to_text_nodes(),
+            [
+                TextNode("No markup included.", TextType.TEXT),
+            ]
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
