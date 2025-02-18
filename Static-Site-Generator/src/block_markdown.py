@@ -69,7 +69,11 @@ class BlockMarkdown():
         return blocks
 
     def _create_patterns(self) -> list[str]:
-        regex = r"^\s*(.*?)\s*$|\n+"
+        regex = (
+            r"^(\s*.*?)\s*$|\n+" # regex pattern for code markdown
+            if self.md_text.startswith("```") and self.md_text.endswith("```")
+            else r"^\s*(.*?)\s*$|\n+"
+        )
         pattern = re.compile(pattern=regex, flags=re.DOTALL | re.MULTILINE)
         matches = list(pattern.findall(self.md_text))
         return [m if m != "" else "\n" for m in matches]
@@ -168,6 +172,10 @@ class BlockMarkdown():
         text = re.sub(r"^\d+\.\s", "", text)
         text = re.sub(r"\n\d+\.\s", "</li><li>", text)
         return f"<li>{text}</li>"
+
+    @staticmethod
+    def _map_text_code(text: str) -> list[str]:
+        return text
 
     def to_html_nodes(self):
         blocks = self.create_blocks()

@@ -129,14 +129,15 @@ class TestBlockMarkdown(unittest.TestCase):
         )
 
     def test_map_paragraph(self):
-        block_md_text = """
-            1. I am *almost* done.
-
-            1. Not
-            2. even
-            3. close.
-        """
+        block_md_text = """```python
+        def is_winner(num: int) -> None:
+            if num == 2:
+                print("You won.")
+            else:
+                print("You lost.")
+        ```"""
         md = BlockMarkdown(block_md_text)
+        print(md.md_text)
         print(md.to_html_nodes())
         pass
 
