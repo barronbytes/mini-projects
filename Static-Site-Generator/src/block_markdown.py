@@ -182,6 +182,12 @@ class BlockMarkdown():
         block_text = [self._map_text_code(blocks)] if is_code_type else BlockMarkdown.create_block_text(blocks, types)
         return (is_code_type, types, block_text)
 
+    def extract_code_language(self) -> str | None:
+        regex = r"^```(\w*?)\s*$|\n+"
+        pattern = re.compile(pattern=regex, flags=re.DOTALL | re.MULTILINE)
+        matches = pattern.search(self.md_text) # returns first match only
+        return matches.group(1) if matches else None
+
     def to_html(self) -> str:
         is_code_type, types, block_text = self.to_block_text()
         inline_md = [InlineMarkdown(text) for text in block_text]
@@ -195,7 +201,8 @@ class BlockMarkdown():
             parent_node = ParentNode(self.parent_anchor, [LeafNode(tag, text) for tag, text in brain])
             html = parent_node.to_html()
         else:
-            tn = TextNode(inline_html[0], types[0], "python")
+            language = self.extract_code_language()
+            tn = TextNode(inline_html[0], types[0], language)
             tn_html = tn.to_leaf_node().to_html()
             html = f"<div>\n{tn_html}\n</div>"
         return html
