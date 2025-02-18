@@ -222,6 +222,27 @@ class TestBlockMarkdown(unittest.TestCase):
             )
         )
 
+    def test_html_code(self):
+        text = """```python
+        def is_winner(num: int) -> None:
+            if num == 2:
+                print("You won.")
+            else:
+                print("You lost.")
+        ```"""
+        md = BlockMarkdown(text)
+        self.assertEqual(
+            md.to_html(),
+'''<div>
+        def is_winner(num: int) -> None:
+            if num == 2:
+                print("You won.")
+            else:
+                print("You lost.")
+</div>''',
+        )
+
+
     def test_html_capstone(self):
         text = """
         # Boot.dev

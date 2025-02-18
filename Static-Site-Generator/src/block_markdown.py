@@ -2,10 +2,10 @@ import re
 from typing import Optional
 
 from enum import Enum
-from text_node import TextNode
+from inline_markdown import InlineMarkdown
 from parent_node import ParentNode
 from leaf_node import LeafNode
-from inline_markdown import InlineMarkdown
+from text_node import TextNode
 
 
 class BlockType(Enum):
@@ -190,7 +190,12 @@ class BlockMarkdown():
         leaf_html = [[node.to_html() for node in nodes] for nodes in leaf_nodes]
         inline_html = ["".join(node) for node in leaf_html]
         brain = [(tag.value[0], text) for tag, text in zip(types, inline_html)]
-        parent_node = []
+        html = ""
         if not is_code_type:
             parent_node = ParentNode(self.parent_anchor, [LeafNode(tag, text) for tag, text in brain])
-        return parent_node.to_html()
+            html = parent_node.to_html()
+        else:
+            tn = TextNode(inline_html[0], types[0], "python")
+            tn_html = tn.to_leaf_node().to_html()
+            html = f"<div>\n{tn_html}\n</div>"
+        return html
