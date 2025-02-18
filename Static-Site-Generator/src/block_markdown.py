@@ -48,7 +48,7 @@ class BlockMarkdown():
             text (str): String of text.
         '''
         self.md_text = text
-        self.md_anchor = "div"
+        self.parent_anchor = "div"
 
     # object string representation
     def __repr__(self) -> str:
@@ -155,12 +155,13 @@ class BlockMarkdown():
     @staticmethod
     def _map_text_quote(text: str) -> list[str]:
         text = re.sub(r"\>\s", "", text)
-        return re.sub(r"\n", "<br>", text)
+        text = re.sub(r"\n", "</p><p>", text)
+        return f"<p>{text}</p>"
 
     @staticmethod
     def _map_text_unordered_list(text: str) -> list[str]:
         text = re.sub(r"^[*-]\s", "", text)
-        text = re.sub(r"\n[*-]\s", "</li><li>", text)
+        text = re.sub(r"\n[*-]\s", "</p><li>", text)
         return f"<li>{text}</li>"
 
     @staticmethod
@@ -181,11 +182,15 @@ class BlockMarkdown():
         block_text = [self._map_text_code(blocks)] if is_code_type else BlockMarkdown.create_block_text(blocks, types)
         return (is_code_type, types, block_text)
 
-    def to_html(self):
+    def to_html(self) -> str:
         is_code_type, types, block_text = self.to_block_text()
         inline_md = [InlineMarkdown(text) for text in block_text]
         text_nodes = [md.to_text_nodes() for md in inline_md]
         leaf_nodes = [[node.to_leaf_node() for node in nodes] for nodes in text_nodes]
-        return leaf_nodes
-
-        #leaf_text = [[node.to_html() for node in nodes] for nodes in leaves]
+        leaf_html = [[node.to_html() for node in nodes] for nodes in leaf_nodes]
+        inline_html = ["".join(node) for node in leaf_html]
+        brain = [(tag.value[0], text) for tag, text in zip(types, inline_html)]
+        parent_node = []
+        if not is_code_type:
+            parent_node = ParentNode(self.parent_anchor, [LeafNode(tag, text) for tag, text in brain])
+        return parent_node.to_html()

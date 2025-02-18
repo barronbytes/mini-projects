@@ -183,7 +183,7 @@ class TestBlockMarkdown(unittest.TestCase):
             (
                 False,
                 [BlockType.H1, BlockType.QUOTE],
-                ["Almost Done", "Not<br>Really"],
+                ["Almost Done", "<p>Not</p><p>Really</p>"],
             )
         )
 
@@ -222,17 +222,36 @@ class TestBlockMarkdown(unittest.TestCase):
             )
         )
 
-    def test_html_paragraphs(self):
+    def test_html_capstone(self):
         text = """
-        Tell me what you **will** do.
+        # Boot.dev
 
-        Not what
-        you *might*
-        do.
+        ## Backend Developer Roadmap
+
+        The initial modules on
+        [boot.dev](https://boot.dev) teach
+        the following:
+
+        > Linux
+        > Git
+        > Python
+
+        I have completed these projects:
+
+        1. BookBot
+        2. Asteroids
+
+        I want to attend these conferences:
+
+        * Dev Nexus
+        * Atlanta Cloud Conference
+        * RenderATL
         """
         md = BlockMarkdown(text)
-        print(md.to_block_text())
-        print(md.to_html())
+        self.assertEqual(
+            md.to_html(),
+            '<div><h1>Boot.dev</h1><h2>Backend Developer Roadmap</h2><p>The initial modules on <a href="https://boot.dev">boot.dev</a> teach the following:</p><blockquote><p>Linux</p><p>Git</p><p>Python</p></blockquote><p>I have completed these projects:</p><ol><li>BookBot</li><li>Asteroids</li></ol><p>I want to attend these conferences:</p><ul><li>Dev Nexus</p><li>Atlanta Cloud Conference</p><li>RenderATL</li></ul></div>',
+        )
 
 
 if __name__ == "__main__":
