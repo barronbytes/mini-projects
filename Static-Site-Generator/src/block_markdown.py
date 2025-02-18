@@ -121,8 +121,7 @@ class BlockMarkdown():
                     blocks: list[tuple[int, str]]) -> list[tuple[int, str]]:
         return blocks + [(j, "".join(matches[j:k+1])) for j, k in overlap]
 
-    @staticmethod
-    def block_type(text: str) -> BlockType:
+    def block_type(self, text: str) -> BlockType:
         match_result = BlockType.PARAGRAPH # default setting
         for delim, block_type in BLOCK_DELIMITERS.items():
             regex = delim
@@ -173,14 +172,15 @@ class BlockMarkdown():
         text = re.sub(r"\n\d+\.\s", "</li><li>", text)
         return f"<li>{text}</li>"
 
-    @staticmethod
-    def _map_text_code(text: str) -> list[str]:
-        return text
+    def _map_text_code(self, blocks: list[str]) -> str:
+        blocks = "".join(blocks)
+        lines = blocks.split("\n")
+        return "\n".join(lines[1:-1]) # exclude first and last element
 
-    def to_html_nodes(self):
+    def to_block_text(self):
+        is_code_type = True if self.md_text.startswith("```") and self.md_text.endswith("```") else False
         blocks = self.create_blocks()
-        types = [BlockMarkdown.block_type(b) for b in blocks]
-        block_text = BlockMarkdown.create_block_text(blocks, types)
+        types = [BlockType.CODE] if is_code_type else [self.block_type(b) for b in blocks]
+        block_text = [self._map_text_code(blocks)] if is_code_type else BlockMarkdown.create_block_text(blocks, types)
         #leaf_text = [[node.to_html() for node in nodes] for nodes in leaves]
-
-        return f"\n{blocks}\n\n{types}\n\n{block_text}"
+        return block_text
