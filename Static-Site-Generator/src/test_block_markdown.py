@@ -147,7 +147,11 @@ class TestBlockMarkdown(unittest.TestCase):
         md = BlockMarkdown(block_md_text)
         self.assertEqual(
             md.to_block_text(),
-            ["Almost done.", "Not really."]
+            (
+                False,
+                [BlockType.PARAGRAPH, BlockType.PARAGRAPH],
+                ["Almost done.", "Not really."],
+            )
         )
 
     def test_block_text_headers(self):
@@ -159,7 +163,11 @@ class TestBlockMarkdown(unittest.TestCase):
         md = BlockMarkdown(block_md_text)
         self.assertEqual(
             md.to_block_text(),
-            ["Almost Done", "Not Really"]
+            (
+                False,
+                [BlockType.H1, BlockType.H2],
+                ["Almost Done", "Not Really"],
+            )
         )
 
     def test_block_text_quotes(self):
@@ -172,7 +180,11 @@ class TestBlockMarkdown(unittest.TestCase):
         md = BlockMarkdown(block_md_text)
         self.assertEqual(
             md.to_block_text(),
-            ["Almost Done", "Not<br>Really"]
+            (
+                False,
+                [BlockType.H1, BlockType.QUOTE],
+                ["Almost Done", "Not<br>Really"],
+            )
         )
 
     def test_block_text_lists(self):
@@ -185,7 +197,11 @@ class TestBlockMarkdown(unittest.TestCase):
         md = BlockMarkdown(block_md_text)
         self.assertEqual(
             md.to_block_text(),
-            ["<li>Almost done</li>", "<li>Not</li><li>Really</li>"]
+            (
+                False,
+                [BlockType.UL, BlockType.OL],
+                ["<li>Almost done</li>", "<li>Not</li><li>Really</li>"],
+            )
         )
 
     def test_block_text_code(self):
@@ -199,8 +215,24 @@ class TestBlockMarkdown(unittest.TestCase):
         md = BlockMarkdown(block_md_text)
         self.assertEqual(
             md.to_block_text(),
-            ['        def is_winner(num: int) -> None:\n            if num == 2:\n                print("You won.")\n            else:\n                print("You lost.")']
+            (
+                True,
+                [BlockType.CODE],
+                ['        def is_winner(num: int) -> None:\n            if num == 2:\n                print("You won.")\n            else:\n                print("You lost.")'],
+            )
         )
+
+    def test_html_paragraphs(self):
+        text = """
+        Tell me what you **will** do.
+
+        Not what
+        you *might*
+        do.
+        """
+        md = BlockMarkdown(text)
+        print(md.to_block_text())
+        print(md.to_html())
 
 
 if __name__ == "__main__":

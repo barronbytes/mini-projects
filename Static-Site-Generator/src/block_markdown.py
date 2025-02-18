@@ -142,9 +142,6 @@ class BlockMarkdown():
     def create_block_text(blocks: list[str], types: list[BlockType]) -> list[list[LeafNode]]:
         map_func = [getattr(BlockMarkdown, t.value[1]) for t in types] # convert block type string values to actual function references
         block_text = [map_func(text) for map_func, text in zip(map_func, blocks)]
-        #inline_md = [InlineMarkdown(text) for text in block_text]
-        #text_nodes = [md.to_text_nodes() for md in inline_md]
-        #leaf_nodes = [[node.to_leaf_node() for node in nodes] for nodes in text_nodes]
         return block_text
 
     @staticmethod
@@ -177,10 +174,18 @@ class BlockMarkdown():
         lines = blocks.split("\n")
         return "\n".join(lines[1:-1]) # exclude first and last element
 
-    def to_block_text(self):
+    def to_block_text(self) -> tuple[bool, list[BlockType], list[str]]:
         is_code_type = True if self.md_text.startswith("```") and self.md_text.endswith("```") else False
         blocks = self.create_blocks()
         types = [BlockType.CODE] if is_code_type else [self.block_type(b) for b in blocks]
         block_text = [self._map_text_code(blocks)] if is_code_type else BlockMarkdown.create_block_text(blocks, types)
+        return (is_code_type, types, block_text)
+
+    def to_html(self):
+        is_code_type, types, block_text = self.to_block_text()
+        inline_md = [InlineMarkdown(text) for text in block_text]
+        text_nodes = [md.to_text_nodes() for md in inline_md]
+        leaf_nodes = [[node.to_leaf_node() for node in nodes] for nodes in text_nodes]
+        return leaf_nodes
+
         #leaf_text = [[node.to_html() for node in nodes] for nodes in leaves]
-        return block_text
