@@ -3,6 +3,7 @@ from html_node import HTMLNode
 
 
 class LeafNode(HTMLNode):
+
     def __init__(self, tag: str, value: str, props: Optional[dict] = None):
         '''
         Initializes a LeafNode instance that extends HTMLNode.

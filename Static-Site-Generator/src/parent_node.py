@@ -4,6 +4,7 @@ from leaf_node import LeafNode
 
 
 class ParentNode(HTMLNode):
+
     def __init__(self, tag: str, children: list[LeafNode], props: Optional[dict] = None):
         '''
         Initializes a ParentNode instance that extends HTMLNode.

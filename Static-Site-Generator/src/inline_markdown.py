@@ -20,6 +20,7 @@ CODE_LANGUAGES = [
     "python", "java",
 ]
 
+
 class InlineMarkdown():
 
     def __init__(self, text: str):

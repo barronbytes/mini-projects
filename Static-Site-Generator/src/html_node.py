@@ -2,6 +2,7 @@ from typing import Optional
 
 
 class HTMLNode():
+
     def __init__(self, tag: Optional[str] = None, props: Optional[dict] = None, 
              value: Optional[str] = None, children: Optional[list['HTMLNode']] = None):
         '''

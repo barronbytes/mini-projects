@@ -11,6 +11,7 @@ class TextType(Enum):
     LINK = "link"
     IMAGE = "image"
 
+
 TAG_TYPE = {
     TextType.TEXT: None,  # no wrapping tag for plain text
     TextType.BOLD: "b",
@@ -19,6 +20,7 @@ TAG_TYPE = {
     TextType.LINK: "a",
     TextType.IMAGE: "img",
 }
+
 
 class TextNode():
 

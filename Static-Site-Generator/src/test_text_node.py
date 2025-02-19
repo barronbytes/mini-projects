@@ -4,6 +4,7 @@ from text_node import TextType, TextNode
 
 
 class TestTextNode(unittest.TestCase):
+
     def test_eq(self):
         tn1 = TextNode("Hello world.", TextType.BOLD)
         tn2 = TextNode("Hello world.", TextType.BOLD)

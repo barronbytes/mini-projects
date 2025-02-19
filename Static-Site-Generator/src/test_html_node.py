@@ -4,6 +4,7 @@ from html_node import HTMLNode
 
 
 class TestHTMLNode(unittest.TestCase):
+
     def test_eq(self):
         node1 = HTMLNode(None, None, "Hello World", None)
         node2 = HTMLNode(None, None, "Hello World", None)

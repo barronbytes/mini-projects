@@ -5,6 +5,7 @@ from leaf_node import LeafNode
 
 
 class TestParentNode(unittest.TestCase):
+
     def test_init_value_error_of_children(self):
         with self.assertRaises(ValueError) as context:
             ParentNode("ul", None)
