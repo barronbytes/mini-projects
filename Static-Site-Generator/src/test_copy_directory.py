@@ -1,26 +1,33 @@
 import unittest
+import os
 
 from copy_directory import CopyDirectory
 
 
 class TestLeafNode(unittest.TestCase):
 
+    def setUp(self):
+        self.brain = CopyDirectory("static", "public")
+
     def test_eq(self):
-        entity1 = CopyDirectory("from_here", "to_here")
-        entity2 = CopyDirectory("from_here", "to_here")
-        self.assertEqual(entity1, entity2)
+        other = CopyDirectory("static", "public")
+        self.assertEqual(self.brain, other)
 
     def test_not_eq(self):
-        entity1 = CopyDirectory("from_here", "to_here")
-        entity2 = CopyDirectory("from_here", "destination")
-        self.assertNotEqual(entity1, entity2)
+        other = CopyDirectory("source_dir_name", "destination_dir_name")
+        self.assertNotEqual(self.brain, other)
 
     def test_is_both_found(self):
-        brain = CopyDirectory("static", "public")
         self.assertEqual(
-            brain.is_both_found(),
+            self.brain.is_both_found(),
             True
         )
+
+    def test_wipe_destination(self):
+        self.brain.wipe_destination()
+        self.assertTrue(os.path.isdir(self.brain.destination))
+        self.assertEqual(len(os.listdir(self.brain.destination)), 0)
+
 
 if __name__ == "__main__":
     unittest.main()
