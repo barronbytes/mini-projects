@@ -27,3 +27,10 @@ class CopyDirectory():
         if isinstance(other, CopyDirectory):
             equality = True if self.source == other.source and self.destination == other.destination else False
         return equality
+
+    def is_both_found(self) -> bool:
+        current_dir = os.path.dirname(__file__)
+        root_dir = os.path.abspath(path=os.path.join(current_dir, ".."))
+        root_contents = os.listdir(root_dir)
+        root_dirs = [item for item in root_contents if os.path.isdir(os.path.join(root_dir, item))]
+        return all([self.source in root_dirs, self.destination in root_dirs, self.source != self.destination])

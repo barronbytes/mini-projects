@@ -15,5 +15,12 @@ class TestLeafNode(unittest.TestCase):
         entity2 = CopyDirectory("from_here", "destination")
         self.assertNotEqual(entity1, entity2)
 
+    def test_is_both_found(self):
+        brain = CopyDirectory("static", "public")
+        self.assertEqual(
+            brain.is_both_found(),
+            True
+        )
+
 if __name__ == "__main__":
     unittest.main()
