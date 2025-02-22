@@ -23,12 +23,12 @@ class BlockType(Enum):
 
 
 BLOCK_DELIMITERS = {
-    r"^\#{1}(?!\*)\s(?P<block_text>.*)": BlockType.H1,
-    r"^\#{2}(?!\*)\s(?P<block_text>.*)": BlockType.H2,
-    r"^\#{3}(?!\*)\s(?P<block_text>.*)": BlockType.H3,
-    r"^\#{4}(?!\*)\s(?P<block_text>.*)": BlockType.H4,
-    r"^\#{5}(?!\*)\s(?P<block_text>.*)": BlockType.H5,
-    r"^\#{6}(?!\*)\s(?P<block_text>.*)": BlockType.H6,
+    r"^\#{1}(?!\#)\s(?P<block_text>.*)": BlockType.H1,
+    r"^\#{2}(?!\#)\s(?P<block_text>.*)": BlockType.H2,
+    r"^\#{3}(?!\#)\s(?P<block_text>.*)": BlockType.H3,
+    r"^\#{4}(?!\#)\s(?P<block_text>.*)": BlockType.H4,
+    r"^\#{5}(?!\#)\s(?P<block_text>.*)": BlockType.H5,
+    r"^\#{6}(?!\#)\s(?P<block_text>.*)": BlockType.H6,
     r"^\>(?!\>)\s(?P<block_text>.*)": BlockType.QUOTE,
     r"^\*{1}(?!\*)\s(?P<block_text>.*)": BlockType.UL,
     r"^\-{1}(?!\-)\s(?P<block_text>.*)": BlockType.UL,
