@@ -41,25 +41,32 @@ class CopyDirectory():
         return all([self.source in root_dirs, self.destination in root_dirs, self.source != self.destination])
 
     def wipe_destination(self) -> None:
-        shutil.rmtree(self.destination)
-        os.mkdir(self.destination)
+        root_dir = self.root_dir()
+        dst_path = os.path.join(root_dir, self.destination)
+        if os.path.exists(dst_path):
+            shutil.rmtree(dst_path)
+        os.mkdir(dst_path)
 
-    def copy_child_dir(self, dst_path: str) -> None:
-        print(f"Creating directory: {dst_path}")
-        parent_dir = os.path.dirname(dst_path)
-        print("parent_dir: ", parent_dir)
-        os.makedirs(dst_path)
+    def copy_child_dir(self, src_path: str, dst_path: str) -> None:
+        os.makedirs(dst_path, exist_ok=True)
+        source_contents = os.listdir(src_path)
+        if source_contents:
+            for item in source_contents:  # Copy contents of the directory
+                src_item = os.path.join(src_path, item)
+                dst_item = os.path.join(dst_path, item)
+                is_file = os.path.isfile(src_item)
+                shutil.copy(src_item, dst_item) if is_file else self.copy_child_dir(src_item, dst_item)
 
     def copy_parent_dir(self) -> None:
         root_dir = self.root_dir()
 
         if self.is_both_found():
-            source_dir = os.path.join(root_dir, self.source)
-            destination_dir = os.path.join(root_dir, self.destination)
+            src_path = os.path.join(root_dir, self.source)
+            dst_path = os.path.join(root_dir, self.destination)
             self.wipe_destination()
-            source_contents = os.listdir(source_dir)
+            source_contents = os.listdir(src_path)
             for item in source_contents:
-                src_path = os.path.join(source_dir, item)
-                dst_path = os.path.join(destination_dir, item)
-                is_file = os.path.isfile(src_path)
-                shutil.copy(src_path, dst_path) if is_file else self.copy_child_dir(dst_path)
+                src_item = os.path.join(src_path, item)
+                dst_item = os.path.join(dst_path, item)
+                is_file = os.path.isfile(src_item)
+                shutil.copy(src_item, dst_item) if is_file else self.copy_child_dir(src_item, dst_item)
