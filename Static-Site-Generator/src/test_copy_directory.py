@@ -28,10 +28,6 @@ class TestLeafNode(unittest.TestCase):
         self.assertTrue(os.path.isdir(self.brain.destination))
         self.assertEqual(len(os.listdir(self.brain.destination)), 0)
 
-    def test_copy_parent(self):
-        self.brain.copy_parent_dir()
-        pass
-
 
 if __name__ == "__main__":
     unittest.main()

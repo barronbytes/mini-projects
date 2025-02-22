@@ -18,7 +18,7 @@ class CopyDirectory():
     # object string representation
     def __repr__(self) -> str:
         return (
-            f"CopyDirectory(source=\"{self.source}\", destination={self.destination})"
+            f"CopyDirectory(source=\"{self.source}\", destination=\"{self.destination}\")"
         )
     
     # equals
@@ -29,7 +29,7 @@ class CopyDirectory():
         return equality
 
     def root_dir(self) -> str:
-        file_path = __file__
+        file_path = os.path.abspath(__file__)
         current_dir = os.path.dirname(file_path)
         root_dir = os.path.abspath(os.path.join(current_dir, ".."))
         return root_dir
@@ -48,10 +48,10 @@ class CopyDirectory():
         os.mkdir(dst_path)
 
     def copy_child_dir(self, src_path: str, dst_path: str) -> None:
-        os.makedirs(dst_path, exist_ok=True)
+        os.mkdir(dst_path)
         source_contents = os.listdir(src_path)
         if source_contents:
-            for item in source_contents:  # Copy contents of the directory
+            for item in source_contents:  # copy contents of the subfolder
                 src_item = os.path.join(src_path, item)
                 dst_item = os.path.join(dst_path, item)
                 is_file = os.path.isfile(src_item)
@@ -65,6 +65,7 @@ class CopyDirectory():
             dst_path = os.path.join(root_dir, self.destination)
             self.wipe_destination()
             source_contents = os.listdir(src_path)
+            print(f"source_contents: {source_contents}")
             for item in source_contents:
                 src_item = os.path.join(src_path, item)
                 dst_item = os.path.join(dst_path, item)
