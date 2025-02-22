@@ -65,7 +65,6 @@ class CopyDirectory():
             dst_path = os.path.join(root_dir, self.destination)
             self.wipe_destination()
             source_contents = os.listdir(src_path)
-            print(f"source_contents: {source_contents}")
             for item in source_contents:
                 src_item = os.path.join(src_path, item)
                 dst_item = os.path.join(dst_path, item)
