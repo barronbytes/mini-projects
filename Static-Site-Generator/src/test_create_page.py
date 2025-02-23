@@ -25,3 +25,8 @@ class TestCreatePage(unittest.TestCase):
         """
         with self.assertRaises(ValueError):
             CreatePage.extract_title(markdown)
+
+    def test_create_page(self):
+        md, html = CreatePage.read_md_and_template()
+        print(f"\n\nMarkdown:\n{md}\n\nHTML Template:\n{html}")
+        pass
