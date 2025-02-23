@@ -91,14 +91,12 @@ class CreatePage():
 
     @staticmethod
     def write_page(template: str, dst_path: str) -> None:
-        pass
-        # write template to destination path if directory exists and path doesn't exist
-        #html_path = os.path.join(CreatePage.root_dir(), CreatePage.dst_dir_file["dir"], CreatePage.dst_dir_file["file"])
-        #dst_dir_path = os.path.dirname(html_path)
-        #if dst_dir_path and not os.path.exists(dst_dir_path):
-        #    os.makedirs(dst_dir_path, exist_ok=True)
-        #with open(file=html_path, mode="w", encoding="utf-8") as page_file:
-        #    page_file.write(template)
+        base_folder = os.path.join(CreatePage.root_dir(), CreatePage.dst_dir_file["dir"])
+        relative_path = os.path.relpath(path=dst_path, start=base_folder)
+        dst_dir = os.path.join(base_folder, os.path.dirname(relative_path))
+        os.makedirs(dst_dir, exist_ok=True)
+        with open(file=dst_path, mode="w", encoding="utf-8") as page_file:
+            page_file.write(template)
 
     @staticmethod
     def create_pages() -> None:
@@ -112,8 +110,6 @@ class CreatePage():
         templates = [CreatePage.create_template(template, title, html) for title, html in zip(titles, htmls)]
 
         dst_paths = [path.replace(CreatePage.src_dir_file["dir"], CreatePage.dst_dir_file["dir"]) for path in md_paths]
+        dst_paths = [path.replace(CreatePage.src_dir_file["file"], CreatePage.dst_dir_file["file"]) for path in dst_paths]
         for temp, path in zip(templates, dst_paths):
             CreatePage.write_page(temp, path)
-
-        print(f"\n\nMarkdown Paths: {md_paths}\n\n")
-        print(f"\n\nHTML Paths: {dst_paths}\n\n")
