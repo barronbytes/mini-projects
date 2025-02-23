@@ -41,9 +41,3 @@ class TestCreatePage(unittest.TestCase):
             CreatePage.split_markdown_parts(markdown),
             ['\n        ### Almost Done\n\n        ', '```\n        def is_ready():\n            pass\n        ```', '\n        ## Not Really\n        '],            
         )
-
-    def test_create_page(self):
-        CreatePage.create_page()
-        #md, html = CreatePage.read_md_and_template()
-        #print(f"\n\nMarkdown:\n{md}\n\nHTML Template:\n{html}")
-        pass
