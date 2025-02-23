@@ -90,7 +90,7 @@ class CreatePage():
         return template
 
     @staticmethod
-    def create_page(template: str, dst_path: str) -> None:
+    def write_page(template: str, dst_path: str) -> None:
         pass
         # write template to destination path if directory exists and path doesn't exist
         #html_path = os.path.join(CreatePage.root_dir(), CreatePage.dst_dir_file["dir"], CreatePage.dst_dir_file["file"])
@@ -113,7 +113,7 @@ class CreatePage():
 
         dst_paths = [path.replace(CreatePage.src_dir_file["dir"], CreatePage.dst_dir_file["dir"]) for path in md_paths]
         for temp, path in zip(templates, dst_paths):
-            CreatePage.create_page(temp, path)
+            CreatePage.write_page(temp, path)
 
         print(f"\n\nMarkdown Paths: {md_paths}\n\n")
         print(f"\n\nHTML Paths: {dst_paths}\n\n")
