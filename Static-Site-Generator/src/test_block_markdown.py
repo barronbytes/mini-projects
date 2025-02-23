@@ -271,7 +271,7 @@ class TestBlockMarkdown(unittest.TestCase):
         md = BlockMarkdown(text)
         self.assertEqual(
             md.to_html(),
-            '<div><h1>Boot.dev</h1><h2>Backend Developer Roadmap</h2><p>The initial modules on <a href="https://boot.dev">boot.dev</a> teach the following:</p><blockquote><p>Linux</p><p>Git</p><p>Python</p></blockquote><p>I have completed these projects:</p><ol><li>BookBot</li><li>Asteroids</li></ol><p>I want to attend these conferences:</p><ul><li>Dev Nexus</p><li>Atlanta Cloud Conference</p><li>RenderATL</li></ul></div>',
+            '<div><h1>Boot.dev</h1><h2>Backend Developer Roadmap</h2><p>The initial modules on <a href="https://boot.dev">boot.dev</a> teach the following:</p><blockquote><p>Linux</p><p>Git</p><p>Python</p></blockquote><p>I have completed these projects:</p><ol><li>BookBot</li><li>Asteroids</li></ol><p>I want to attend these conferences:</p><ul><li>Dev Nexus</li><li>Atlanta Cloud Conference</li><li>RenderATL</li></ul></div>',
         )
 
 

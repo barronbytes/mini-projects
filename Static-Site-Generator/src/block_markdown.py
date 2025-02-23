@@ -161,7 +161,7 @@ class BlockMarkdown():
     @staticmethod
     def _map_text_unordered_list(text: str) -> list[str]:
         text = re.sub(r"^[*-]\s", "", text)
-        text = re.sub(r"\n[*-]\s", "</p><li>", text)
+        text = re.sub(r"\n[*-]\s", "</li><li>", text)
         return f"<li>{text}</li>"
 
     @staticmethod
