@@ -57,6 +57,8 @@ class CreatePage():
         page_title = CreatePage.extract_title(markdown)
         template = template.replace("{{ Title }}", page_title)
         template = template.replace("{{ Content }}", page_html)
+        template = template.replace("</ul><p> </p><ul>", "")
+        template = template.replace("</ol><p> </p><ol>", "")
 
         # write template to destination path if directory exists and path doesn't exist
         html_path = os.path.join(CreatePage.root_dir(), CreatePage.html_dir_file["dir"], CreatePage.html_dir_file["file"])
