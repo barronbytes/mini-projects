@@ -233,13 +233,13 @@ class TestBlockMarkdown(unittest.TestCase):
         md = BlockMarkdown(text)
         self.assertEqual(
             md.to_html(),
-'''<div>
+'''<div><pre><code class=\"language-python\">
         def is_winner(num: int) -> None:
             if num == 2:
                 print("You won.")
             else:
                 print("You lost.")
-</div>''',
+</code></pre></div>''',
         )
 
 

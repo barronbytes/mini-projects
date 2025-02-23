@@ -202,7 +202,8 @@ class BlockMarkdown():
             html = parent_node.to_html()
         else:
             language = self.extract_code_language()
+            lang = language if language else ""
             tn = TextNode(inline_html[0], types[0], language)
             tn_html = tn.to_leaf_node().to_html()
-            html = f"<div>\n{tn_html}\n</div>"
+            html = f"<div><pre><code class=\"language-{lang}\">\n{tn_html}\n</code></pre></div>"
         return html
