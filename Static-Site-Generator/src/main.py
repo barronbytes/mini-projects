@@ -1,4 +1,3 @@
-from text_node import TextNode, TextType
 from copy_directory import CopyDirectory
 from create_page import CreatePage
 
