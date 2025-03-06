@@ -7,8 +7,8 @@ from block_markdown import BlockMarkdown
 class CreatePage():
 
     template_file = "template.html"
-    src_dir_file = {"dir": "content", "file": "index.md"}
-    dst_dir_file = {"dir": "public", "file": "index.html"}
+    src_dir_file = {"dir": "content", "file": ".md"}
+    dst_dir_file = {"dir": "public", "file": ".html"}
  
     @staticmethod
     def root_dir() -> str:
@@ -28,7 +28,7 @@ class CreatePage():
             md_paths.extend(
                 os.path.join(folder, file)
                 for file in files
-                if file == CreatePage.src_dir_file["file"]
+                if file.endswith(CreatePage.src_dir_file["file"])
             )
         return md_paths
 
