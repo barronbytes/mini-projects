@@ -6,10 +6,7 @@ Lorem ipsum
 
 Check out the project demo video!
 
-<video width="600" controls>
-  <source src="demo/ssg-demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+![Demo GIF](demo/ssg-demo.gif)
 
 ## Features
 
