@@ -2,9 +2,11 @@
 
 Lorem ipsum
 
-## Visit The Site
+## Demo Video
 
-Feel free to check out the project here!
+Check out the project demo video!
+
+[Watch the demo video](demo/ssg-demo.mp4)
 
 ## Features
 
