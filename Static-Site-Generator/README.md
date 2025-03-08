@@ -17,8 +17,9 @@ Feel free to check out the [project here](https://barronbytes.github.io/Static-S
 
 Before running this project locally, ensure you have the following installed:
 
-* Python 3.9 or higher *(for version of type hinting syntax used)*
 * IDE (VS Code, PyCharm, etc.)
+* Python 3.9 or higher > *for version of type hinting syntax used*
+* Bourne Shell compatible OS like Linux or macOS > *Windows users should [download WSL2](https://learn.microsoft.com/en-us/windows/wsl/install)*
 
 ## Quick Start
 
@@ -27,12 +28,26 @@ Follow the steps below to correctly setup the project on your local device.
 ### Backend Setup
 
 1. Clone the repository
-2. Locate the **content folder** > delete the default files and subfolders
-3. Locate the **static folder** > delete the default files and subfolders
+2. Locate **content folder** > delete the default files and subfolders
+3. Locate **demo folder** > delete folder *(it's not needed for functionality)* 
+4. Locate **static folder** > delete the default files and subfolders
+5. Locate **README.md file** > edit file contents to your liking
 
 ## Usage
 
-Lorem ipsum
+Follow three steps to run the program for your custom needs:
+
+### Step 1: Upload Markdown Files
+
+* **File Types:** Only files with the **.md** extension can be saved in the **content folder** and its subfolders.
+* **Root Folder:** One file called **index.md** required. Additional files and subfolders allowed.
+
+**Example Folder Structure:**
+<img src="demo/ssg-page.PNG" alt="Demo GIF" width="40%" >
+
+### Step 2: Upload Assets Files
+
+### Step 3: Run Program
 
 ## Development Roadmap
 
