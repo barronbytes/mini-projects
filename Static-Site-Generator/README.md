@@ -7,7 +7,7 @@ I'm excited to showcase a static site generator I built using Python. This tool 
 Feel free to check out the [project here](https://barronbytes.github.io/Static-Site-Generator/)!
 
 <!-- HTML image tag to control size -->
-<img src="demo/ssg-page.PNG" alt="Demo GIF" width="80%" >
+<img src="demo/ssg-page.PNG" alt="Demo GIF" width="80%">
 
 ## Features
 
@@ -42,19 +42,30 @@ Follow three steps to run the program for your custom needs:
 * **File Types:** Only files with the **.md** extension can be saved in the **content folder** and its subfolders.
 * **Root Folder:** One file called **index.md** required. Additional files and subfolders allowed.
 
-**Example Folder Structure:**
+**Example Content Folder Structure:**
 
-<img src="demo/usage-step-1.PNG" alt="Illustration of proper content folder sturcture" width="80%" >
+<img src="demo/usage-step-1.PNG" alt="Illustration of proper content folder sturcture" width="60%">
 
 ### Step 2: Upload Assets Files
 
 * **Styling:** The **static folder** must have one **index.css** file for styling of web pages.
 * **Optional:** You can add additional subfolders to save images.
 
-<img src="demo/usage-step-2.PNG" alt="Illustration of proper static folder structure" width="80%" >
+**Example Static Folder Structure:**
+
+<img src="demo/usage-step-2.PNG" alt="Illustration of proper static folder structure" width="60%">
 
 ### Step 3: Run Program
 
+* Open terminal
+* The absolute path in the terminal should match the root project folder name, Static-Site-Generator
+* Type the command `bash main.sh` to run the program
+
+Running the program does two things: it clears the **public folder** and then populates it with the necessary contents. Your original **.md** files have now been converted to **.html** files, styled properly, and linked to the uploaded assets. **DO NOT** edit any files in the root folder or src subfolder unless you want to customize the code at the heart of this project's functionality. The image below shows how the sample files from the previous two steps would be processed and saved.
+
+**Example Public Folder Structure:**
+
+<img src="demo/usage-step-3.PNG" alt="Illustration of proper public folder structure" width="60%">
 
 ## Development Roadmap
 
