@@ -1,24 +1,34 @@
 # Static Site Generator
 
-Lorem ipsum
+I'm excited to showcase a static site generator I built using Python. This tool lets users upload Markdown, CSS, and image files, which are then processed and converted into fully styled HTML pages.
 
-## Demo Video
+## Visit The Site
 
-Check out the project demo video!
+Feel free to check out the [project here](https://barronbytes.github.io/Static-Site-Generator/)!
 
-<img src="demo/ssg-demo.gif" width="600" alt="Demo GIF">
+<!-- HTML image tag to control size -->
+<img src="demo/ssg-page.png" alt="Demo GIF" width="80%" >
 
 ## Features
 
-Lorem ipsum
+**Python Backend:** Used type hinting and `unittest` for 58 edge cases, all of which passed.
 
 ## Prerequisites
 
-Lorem ipsum
+Before running this project locally, ensure you have the following installed:
 
-## Installations
+* Python 3.9 or higher *(for version of type hinting syntax used)*
+* IDE (VS Code, PyCharm, etc.)
 
-Lorem ipsum
+## Quick Start
+
+Follow the steps below to correctly setup the project on your local device.
+
+### Backend Setup
+
+1. Clone the repository
+2. Locate the **content folder** > delete the default files and subfolders
+3. Locate the **static folder** > delete the default files and subfolders
 
 ## Usage
 
