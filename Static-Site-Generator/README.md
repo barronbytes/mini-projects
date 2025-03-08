@@ -7,7 +7,7 @@ I'm excited to showcase a static site generator I built using Python. This tool 
 Feel free to check out the [project here](https://barronbytes.github.io/Static-Site-Generator/)!
 
 <!-- HTML image tag to control size -->
-<img src="demo/ssg-page.png" alt="Demo GIF" width="80%" >
+<img src="demo/ssg-page.PNG" alt="Demo GIF" width="80%" >
 
 ## Features
 
