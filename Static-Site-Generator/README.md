@@ -40,7 +40,7 @@ Follow three steps to run the program for your custom needs:
 ### Step 1: Upload Markdown Files
 
 * **File Types:** Only files with the **.md** extension can be saved in the **content folder** and its subfolders.
-* **Root Folder:** One file called **index.md** required. Additional files and subfolders allowed.
+* **Root Folder:** One file called **index.md** is required. Additional files and subfolders are allowed.
 
 **Example Content Folder Structure:**
 
@@ -57,9 +57,9 @@ Follow three steps to run the program for your custom needs:
 
 ### Step 3: Run Program
 
-* Open terminal
-* The absolute path in the terminal should match the root project folder name, Static-Site-Generator
-* Type the command `bash main.sh` to run the program
+* Open terminal.
+* The absolute path in the terminal should match the root project folder name, Static-Site-Generator.
+* Type the command `bash main.sh` to run the program.
 
 Running the program does two things: it clears the **public folder** and then populates it with the necessary contents. Your original **.md** files have now been converted to **.html** files, styled properly, and linked to the uploaded assets. **DO NOT** edit any files in the root folder or src subfolder unless you want to customize the code at the heart of this project's functionality. The image below shows how the sample files from the previous two steps would be processed and saved.
 
@@ -71,7 +71,7 @@ Running the program does two things: it clears the **public folder** and then po
 
 ### Setbacks
 
-Lorem ipsum
+As the project grew, it became challenging to track data types for method parameters and return values since Python is not statically typed by default. Initially, I relied on comments to manage this, but later [discovered Python’s type hinting feature](https://docs.python.org/3/library/typing.html). This significantly boosted my productivity, making it easier to implement code enhancements and write unit tests for edge cases.
 
 ### Successes
 
@@ -79,7 +79,9 @@ Lorem ipsum
 
 ### Improvements
 
-Lorem ipsum
+The current project setup requires users to manually download and run it locally in an IDE, which limits the potential user base. Many users may not be familiar with this process, making it difficult for a broader audience to use the tool.
+
+The next step for improvement is to develop a frontend component. A web app would allow users to easily upload files and download their results with a simple click. Additionally, the app could temporarily cache uploaded files to streamline the process.
 
 ## Credits & Contributing
 
