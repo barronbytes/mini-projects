@@ -6,7 +6,7 @@ Lorem ipsum
 
 Check out the project demo video!
 
-![Demo GIF](demo/ssg-demo.gif)
+<img src="demo/ssg-demo.gif" width="600" alt="Demo GIF">
 
 ## Features
 
