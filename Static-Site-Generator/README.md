@@ -43,7 +43,8 @@ Follow three steps to run the program for your custom needs:
 * **Root Folder:** One file called **index.md** required. Additional files and subfolders allowed.
 
 **Example Folder Structure:**
-<img src="demo/ssg-page.PNG" alt="Demo GIF" width="40%" >
+
+<img src="demo/usage-step-1.PNG" alt="Demo GIF" width="40%" >
 
 ### Step 2: Upload Assets Files
 
