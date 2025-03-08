@@ -44,11 +44,17 @@ Follow three steps to run the program for your custom needs:
 
 **Example Folder Structure:**
 
-<img src="demo/usage-step-1.PNG" alt="Demo GIF" width="40%" >
+<img src="demo/usage-step-1.PNG" alt="Illustration of proper content folder sturcture" width="80%" >
 
 ### Step 2: Upload Assets Files
 
+* **Styling:** The **static folder** must have one **index.css** file for styling of web pages.
+* **Optional:** You can add additional subfolders to save images.
+
+<img src="demo/usage-step-2.PNG" alt="Illustration of proper static folder structure" width="80%" >
+
 ### Step 3: Run Program
+
 
 ## Development Roadmap
 
