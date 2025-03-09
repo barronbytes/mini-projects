@@ -71,11 +71,11 @@ Running the program does two things: it clears the **public folder** and then po
 
 ### Setbacks
 
-As the project grew, it became challenging to track data types for method parameters and return values since Python is not statically typed by default. Initially, I relied on comments to manage this, but later [discovered Python’s type hinting feature](https://docs.python.org/3/library/typing.html). This significantly boosted my productivity, making it easier to implement code enhancements and write unit tests for edge cases.
+As the project grew, it became challenging to track data types for method parameters and return values since Python is not statically typed by default. Initially, I relied on comments to manage this, but later [discovered Python’s type hinting feature](https://docs.python.org/3/library/typing.html). This significantly boosted my productivity, making it easier to implement code enhancements and write unit tests for edge cases. Lastly, this project taught me a valuable lesson: **ALWAYS** push your changes to GitHub. After nearly completing the project, a failed Windows update blocked access to my files, forcing me to wipe my device clean and start over.
 
 ### Successes
 
-Lorem ipsum
+This project built my confidence in using object-oriented and functional programming. Writing unit tests also became easier. I wrote 58 tests in total.
 
 ### Improvements
 
