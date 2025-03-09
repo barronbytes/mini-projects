@@ -88,7 +88,8 @@ As the project grew, it became challenging to track data types for method parame
 
 **Unit Testing:**
 
-* **Simplified testing:** Relied on **type hinting** to simplify process of generating tests, and created common test environments with **test fixture methods** like the setUp() method.
+* **Test fixture:** Reduced code duplication by using `setUp` method in test files.
+* **Debugging code:** Relied on **type hinting** to simplify process.
 * **Code coverage with `unittest` library**: 58 tests written and passed for edge cases in 9 Python files.
 
 ### Improvements
