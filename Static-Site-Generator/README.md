@@ -1,6 +1,6 @@
 # Static Site Generator
 
-I'm excited to showcase a static site generator I built using Python. This tool lets users upload Markdown, CSS, and image files, which are then processed and converted into fully styled HTML pages.
+I'm excited to showcase a static site generator I built using Python. This tool lets users upload markdown, CSS, and image files, which are then processed and converted into fully styled HTML pages.
 
 ## Visit The Site
 
@@ -75,7 +75,15 @@ As the project grew, it became challenging to track data types for method parame
 
 ### Successes
 
-This project built my confidence in using object-oriented and functional programming. Writing unit tests also became easier. I wrote 58 tests in total.
+**File Management: copy_directory.py**
+
+* **Recursion:** Used to copy files and nested directories from one folder to another, maintaining the original structure.
+* **Python `os` and `shutil` library methods used:** abspath(), dirname(), join(), exists(), isdir(), isfile(), listdir(), mkdir(), rmtree()
+
+**Unit Testing:**
+
+* **Code coverage with `unittest` library**: 58 tests written and passed for edge cases in 9 Python files.
+* **Common test environment:** simplified test writing by using setUp() method
 
 ### Improvements
 
