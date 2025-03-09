@@ -75,15 +75,21 @@ As the project grew, it became challenging to track data types for method parame
 
 ### Successes
 
+**Regular Expressions: inline_markdown.py, block_markdown.py, create_page.py**
+
+* **Data cleaning and preparation:** Utilized enums to match patterns in markdown files and convert them into HTML components.
+* **Reading and writing files:** Generated HTML files by reading a template and updating its content based on pattern matches of HTML components.
+* **Python `re` library methods used:** compile(), search(), findall(), finditer(), split()
+
 **File Management: copy_directory.py**
 
 * **Recursion:** Used to copy files and nested directories from one folder to another, maintaining the original structure.
-* **Python `os` and `shutil` library methods used:** abspath(), dirname(), join(), exists(), isdir(), isfile(), listdir(), mkdir(), rmtree()
+* **Python `os` and `shutil` library methods used:** abspath(), dirname(), join(), exists(), isdir(), isfile(), listdir(), mkdir(), rmtree(), walk()
 
 **Unit Testing:**
 
 * **Code coverage with `unittest` library**: 58 tests written and passed for edge cases in 9 Python files.
-* **Common test environment:** simplified test writing by using setUp() method
+* **Common test environment:** Simplified test writing by using setUp() method.
 
 ### Improvements
 
