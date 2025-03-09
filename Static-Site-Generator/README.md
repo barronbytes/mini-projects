@@ -88,8 +88,8 @@ As the project grew, it became challenging to track data types for method parame
 
 **Unit Testing:**
 
+* **Simplified testing:** Relied on **type hinting** to simplify process of generating tests, and created common test environments with **test fixture methods** like the setUp() method.
 * **Code coverage with `unittest` library**: 58 tests written and passed for edge cases in 9 Python files.
-* **Common test environment:** Simplified test writing by using setUp() method.
 
 ### Improvements
 
