@@ -8,9 +8,9 @@ Similarly, we don’t just learn to code for nothing. If something inspired you 
 
 ## Object-Oriented Programming (OOP) [🔝](#need-project-ideas-great-heres-how-i-started-out)
 
-* **BookBot:** command-line Python app peforming analysis on text files
-* **Asteroids:** `PyGame` app of class Asteroids game; used `Pygbag` to conver to WebAssembly
-* **Static Site Generator:** practice using servers, regular expressions, and file handling to convert markdown and images to HTML pages
+* [BookBot](https://github.com/barronbytes/mini-projects/tree/main/bookbot): command-line Python app peforming analysis on text files
+* [Asteroids](https://github.com/barronbytes/mini-projects/tree/main/asteroids): `PyGame` app of class Asteroids game; used `Pygbag` to conver to WebAssembly
+* [Static Site Generator](https://github.com/barronbytes/mini-projects/tree/main/static-site-generator): practice using servers, regular expressions, and file handling to convert markdown and images to HTML pages
 
 ## Data Science [🔝](#need-project-ideas-great-heres-how-i-started-out)
 
