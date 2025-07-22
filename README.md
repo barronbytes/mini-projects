@@ -18,6 +18,10 @@ Similarly, we don’t just learn to code for nothing. If something inspired you 
 
 ## APIs [🔝](#need-project-ideas-great-heres-how-i-started-out)
 
+* [gorest](https://github.com/barronbytes/mini-projects/tree/main/gorest): CRUD operations on public API
+* [flashcards](https://github.com/barronbytes/mini-projects/tree/main/flashcards): practice using `pydantic` and `FastAPI` to build schemas, models, services, and routes
+* [customer-reviews](https://github.com/barronbytes/mini-projects/tree/main/customer-reviews): `OpenAI` integration for sentimental analysis of JSON data
+
 ## Cloud [🔝](#need-project-ideas-great-heres-how-i-started-out)
 
 * [Cloud Resume Challenge](https://github.com/barronbytes/mini-projects/tree/main/cloud-resume-challenge): hosting a static portfolio website on AWS
