@@ -1,0 +1,6 @@
+name,weaknesses,strengths,immunities
+Fire,"['Water', 'Ground', 'Rock']","['Bug', 'Steel', 'Grass', 'Ice']",[]
+Water,"['Electric', 'Grass']","['Fire', 'Ground', 'Rock']",[]
+Electric,['Ground'],"['Water', 'Flying']",[]
+Grass,"['Fire', 'Ice', 'Poison', 'Flying', 'Bug']","['Water', 'Ground', 'Rock']",[]
+Psychic,"['Bug', 'Ghost', 'Dark']","['Fighting', 'Poison']",[]

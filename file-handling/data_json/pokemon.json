@@ -1,0 +1,59 @@
+{
+    "types": {
+        "fire": {
+            "name": "Fire",
+            "weaknesses": [
+                "Water",
+                "Ground",
+                "Rock"
+            ],
+            "strengths": [
+                "Bug",
+                "Steel",
+                "Grass",
+                "Ice"
+            ],
+            "immunities": []
+        },
+        "water": {
+            "name": "Water",
+            "weaknesses": [
+                "Electric",
+                "Grass"
+            ],
+            "strengths": [
+                "Fire",
+                "Ground",
+                "Rock"
+            ],
+            "immunities": []
+        },
+        "electric": {
+            "name": "Electric",
+            "weaknesses": [
+                "Ground"
+            ],
+            "strengths": [
+                "Water",
+                "Flying"
+            ],
+            "immunities": []
+        },
+        "grass": {
+            "name": "Grass",
+            "weaknesses": [
+                "Fire",
+                "Ice",
+                "Poison",
+                "Flying",
+                "Bug"
+            ],
+            "strengths": [
+                "Water",
+                "Ground",
+                "Rock"
+            ],
+            "immunities": []
+        }
+    }
+}
