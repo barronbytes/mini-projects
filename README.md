@@ -29,6 +29,10 @@ Similarly, we don’t just learn to code for nothing. If something inspired you 
 
 ## Data Science [🔝](#need-project-ideas-great-heres-how-i-started-out)
 
+* [Static Web Scraper](https://github.com/barronbytes/mini-projects/tree/main/static-web-scraper): used `Beautiful Soup` library to web scrape static pages with pagination
+* [HR Monitoring](https://github.com/barronbytes/mini-projects/tree/main/hr-monitoring): used `pandas` to analzye text file HR data to calculate summary statistics
+* [Weather Analysis](https://github.com/barronbytes/mini-projects/tree/main/weather-analysis): used `pandas` to analyze CSV file data for exploratory data analysis
+
 ## Frameworks [🔝](#need-project-ideas-great-heres-how-i-started-out)
 
 * [Polling System](https://github.com/barronbytes/mini-projects/tree/main/polling-system): Django getting started tutorial project; [offical docs link here](https://docs.djangoproject.com/en/5.2/intro/)
