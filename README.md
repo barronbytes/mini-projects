@@ -12,7 +12,10 @@ Similarly, we don’t just learn to code for nothing. If something inspired you 
 * [Asteroids](https://github.com/barronbytes/mini-projects/tree/main/asteroids): `PyGame` app of class Asteroids game; used `Pygbag` to conver to WebAssembly
 * [Static Site Generator](https://github.com/barronbytes/mini-projects/tree/main/static-site-generator): practice using servers, regular expressions, and file handling to convert markdown and images to HTML pages
 
+## Functional Programming (FP) [🔝](#need-project-ideas-great-heres-how-i-started-out)
+
+* [Functional Programming](https://github.com/barronbytes/mini-projects/tree/main/functional-programming): Python practice from [boot.dev](boot.dev) course
+
 ## Data Science [🔝](#need-project-ideas-great-heres-how-i-started-out)
 
 ## APIs [🔝](#need-project-ideas-great-heres-how-i-started-out)
-
