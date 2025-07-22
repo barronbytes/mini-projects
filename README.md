@@ -30,4 +30,4 @@ Similarly, we don’t just learn to code for nothing. If something inspired you 
 
 ## Frameworks [🔝](#need-project-ideas-great-heres-how-i-started-out)
 
-* [Polling System](https://github.com/barronbytes/mini-projects/tree/main/polling-system): Django getting started tutorial project [offical docs link here](https://docs.djangoproject.com/en/5.2/intro/)
+* [Polling System](https://github.com/barronbytes/mini-projects/tree/main/polling-system): Django getting started tutorial project; [offical docs link here](https://docs.djangoproject.com/en/5.2/intro/)
