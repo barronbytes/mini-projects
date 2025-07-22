@@ -10,7 +10,7 @@ This project allows business clients to **automate sentimental analysis of custo
 
 ## Live Demo [🔝](#sentimental-analysis-with-openai-)
 
-Feel free to check out a better view of the [project here](https://barronbytes.github.io/OpenAI/)!
+Feel free to check out a better view of the [project here](https://barronbytes.github.io/customer-reviews/)!
 
 <img src="demo/full_demo.gif" />
 

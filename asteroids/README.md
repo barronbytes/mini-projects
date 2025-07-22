@@ -4,16 +4,16 @@ This project is a retro-style Asteroids game built with Python's Pygame. The end
 
 ## Visit The Site [🔝](#asteroids)
 
-Feel free to check out the [project here](https://barronbytes.github.io/Asteroids/)!
+Feel free to check out the [project here](https://barronbytes.github.io/asteroids/)!
 
 <!-- HTML image tag to control size -->
 <img src="images/asteroids_game.PNG" alt="Asteroids Game Screenshot" width="80%">
 
-## Features [🔝](#asteroids)
+## Features [🔝](#asteroids-)
 
 - **Pygame:** Utilized to create 5 classes for game environment.
 
-## Prerequisites [🔝](#asteroids)
+## Prerequisites [🔝](#asteroids-)
 
 Before running this project locally, ensure you have the following installed:
 
@@ -22,9 +22,9 @@ Before running this project locally, ensure you have the following installed:
 - VcXsrv (if running WSL--instructions below)
 - Pygbag (will need this to create web-ready version of project)
 
-## Installations [🔝](#asteroids)
+## Installations [🔝](#asteroids-)
 
-### Pygame Setup [🔝](#asteroids)
+### Pygame Setup [🔝](#asteroids-)
 
 1. Setup virtual environment:
 ``` bash
@@ -40,7 +40,7 @@ pip install -r requirements.txt
 python3 -m pygame
 ```
 
-### VcXsrv Setup [🔝](#asteroids)
+### VcXsrv Setup [🔝](#asteroids-)
 
 1. Open the PowerShell (not Linux) terminal and ensure you have WSL2 installed with this command:
 ``` powershell
@@ -62,7 +62,7 @@ xeyes
 ```
 5. This works the first time. On subsequent attempts to run your code, you should **ALWAYS** open a new session of VcXsrv. You do this by launching the **XLaunch** app.
 
-### Pygbag Setup [🔝](#asteroids)
+### Pygbag Setup [🔝](#asteroids-)
 
 1. Be inside project folder before using Linux commands
 2. Linux (update package manager): sudo apt update
@@ -72,7 +72,7 @@ xeyes
 6. Edit **main.py** file only as instructed by the [pygbag community](https://pygame-web.github.io/wiki/pygbag/).
 7. Linux (convert files): **pygbag .**
 
-## Usage (How To Play!) [🔝](#asteroids)
+## Usage (How To Play!) [🔝](#asteroids-)
 
 Use keyboard strokes to control spaceship:
 - Move up: *w* or *up* arrow
@@ -85,7 +85,7 @@ User keyboard or mouse actions to exit game:
 - Click upper righthand corner 'X' to close game browser (only works on pygame version)
 - Click **Esc** button (works on both pygame and web version)
 
-## Development Roadmap [🔝](#asteroids)
+## Development Roadmap [🔝](#asteroids-)
 
 ### Setbacks
 
@@ -99,6 +99,6 @@ I applied object-oriented programming concepts (like abstract classes and inheri
 
 The project's features and deployment model can be improved. Game logic can be updated to track leaderboard scores, monitor game lives, and support touchscreen input for mobile and tablet users. Additionally, my initial attempt to use a YAML file for continuous deployment failed. [Pygbag provides deployment documentation](https://pygame-web.github.io/wiki/publishing/github.io/) for using YAML files and GitHub Actions for this deployment model.
 
-## Credits & Contributing [🔝](#asteroids)
+## Credits & Contributing [🔝](#asteroids-)
 
 Thank you [boot.dev](https://www.boot.dev/) for providing an online back-end learning platform with integrated project ideas. Contributions are welcome! Feel free to submit a pull request to improve the project or open an issue to report any problems.

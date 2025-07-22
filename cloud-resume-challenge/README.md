@@ -2,26 +2,26 @@
 
 I created my portfolio website alongside completing the [Cloud Resume Challenge](https://cloudresumechallenge.dev/docs/the-challenge/aws/), gaining hands-on experience with software development and cloud services.
 
-## Visit The Site [🔝](#cloud-resume-challenge)
+## Visit The Site [🔝](#cloud-resume-challenge-)
 
 Feel free to check out the [project here](README.md)! *Link currently down.*
 
 ![portfolio website homepage](./images/portfolio-homepage.PNG)
 
-## Tech Stack [🔝](#cloud-resume-challenge)
+## Tech Stack [🔝](#cloud-resume-challenge-)
 
 - **Frontend:** HTML, CSS, CSS Grid, Flexbox
 - **Backend:** *in progress*
 - **Cloud:** AWS, Cloudflare
 
-## Prerequisites [🔝](#cloud-resume-challenge)
+## Prerequisites [🔝](#cloud-resume-challenge-)
 
 The following services were used to complete this project:
 
 - [AWS account](https://aws.amazon.com/)
 - [Cloudflare account](https://www.cloudflare.com/)
 
-## The Cloud Resume Challenge – AWS Steps [🔝](#cloud-resume-challenge)
+## The Cloud Resume Challenge – AWS Steps [🔝](#cloud-resume-challenge-)
 
 This project includes 16 steps, with the completed ones highlighted in bold.
 

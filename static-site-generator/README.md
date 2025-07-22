@@ -2,18 +2,18 @@
 
 I'm excited to showcase a static site generator I built using Python. This tool lets users upload markdown, CSS, and image files, which are then processed and converted into fully styled HTML pages.
 
-## Visit The Site [🔝](#static-site-generator)
+## Visit The Site [🔝](#static-site-generator-)
 
 Feel free to check out the [project here](https://barronbytes.github.io/Static-Site-Generator/)!
 
 <!-- HTML image tag to control size -->
 <img src="demo/ssg-page.PNG" alt="Demo GIF" width="80%">
 
-## Features [🔝](#static-site-generator)
+## Features [🔝](#static-site-generator-)
 
 **Python Backend:** Used type hinting and `unittest` for 58 edge cases, all of which passed.
 
-## Prerequisites [🔝](#static-site-generator)
+## Prerequisites [🔝](#static-site-generator-)
 
 Before running this project locally, ensure you have the following installed:
 
@@ -21,11 +21,11 @@ Before running this project locally, ensure you have the following installed:
 * Python 3.9 or higher > *for version of type hinting syntax used*
 * Bourne Shell compatible OS like Linux or macOS > *Windows users should [download WSL2](https://learn.microsoft.com/en-us/windows/wsl/install)*
 
-## Quick Start [🔝](#static-site-generator)
+## Quick Start [🔝](#static-site-generator-)
 
 Follow the steps below to correctly setup the project on your local device.
 
-### Backend Setup [🔝](#static-site-generator)
+### Backend Setup [🔝](#static-site-generator-)
 
 1. Clone the repository
 2. Locate **content folder** > delete the default files and subfolders
@@ -33,11 +33,11 @@ Follow the steps below to correctly setup the project on your local device.
 4. Locate **static folder** > delete the default files and subfolders
 5. Locate **README.md file** > edit file contents to your liking
 
-## Usage [🔝](#static-site-generator)
+## Usage [🔝](#static-site-generator-)
 
 Follow three steps to run the program for your custom needs:
 
-### Step 1: Upload Markdown Files [🔝](#static-site-generator)
+### Step 1: Upload Markdown Files [🔝](#static-site-generator-)
 
 * **File Types:** Only files with the **.md** extension can be saved in the **content folder** and its subfolders.
 * **Root Folder:** One file called **index.md** is required. Additional files and subfolders are allowed.
@@ -46,7 +46,7 @@ Follow three steps to run the program for your custom needs:
 
 <img src="demo/usage-step-1.PNG" alt="Illustration of proper content folder sturcture" width="60%">
 
-### Step 2: Upload Assets Files [🔝](#static-site-generator)
+### Step 2: Upload Assets Files [🔝](#static-site-generator-)
 
 * **Styling:** The **static folder** must have one **index.css** file for styling of web pages.
 * **Optional:** You can add additional subfolders to save images.
@@ -55,7 +55,7 @@ Follow three steps to run the program for your custom needs:
 
 <img src="demo/usage-step-2.PNG" alt="Illustration of proper static folder structure" width="60%">
 
-### Step 3: Run Program [🔝](#static-site-generator)
+### Step 3: Run Program [🔝](#static-site-generator-)
 
 * Open terminal.
 * The absolute path in the terminal should match the root project folder name, Static-Site-Generator.
@@ -67,7 +67,7 @@ Running the program does two things: it clears the **public folder** and then po
 
 <img src="demo/usage-step-3.PNG" alt="Illustration of proper public folder structure" width="60%">
 
-## Development Roadmap [🔝](#static-site-generator)
+## Development Roadmap [🔝](#static-site-generator-)
 
 ### Setbacks
 
@@ -98,6 +98,6 @@ The current project setup requires users to manually download and run it locally
 
 The next step for improvement is to develop a frontend component. A web app would allow users to easily upload files and download their results with a simple click. Additionally, the app could temporarily cache uploaded files to streamline the process.
 
-## Credits & Contributing [🔝](#static-site-generator)
+## Credits & Contributing [🔝](#static-site-generator-)
 
 Thank you [boot.dev](boot.dev) for providing an online back-end learning platform with integrated project ideas. Contributions are welcome! Feel free to submit a pull request to improve the project or open an issue to report any problems.
