@@ -6,6 +6,10 @@ Coach Herm Edwards once said:
 
 Similarly, we don’t just learn to code for nothing. If something inspired you to start learning, then you probably know where I’m going with this. You learned because you couldn’t resist the idea of building something complex. I’m talking about your future capstone project. But to get there, you first need to get comfortable with some building blocks. That’s what this repo is for—**a collection of small projects to practice the fundamentals**. Every journey is different, but if ours are at all similar, then what helped me might help you too. I wish you all the best.
 
+## HTML & CSS [🔝](#need-project-ideas-great-heres-how-i-started-out)
+
+* [Cloud Resume Challenge](https://github.com/barronbytes/mini-projects/tree/main/cloud-resume-challenge): hosting a static portfolio website on AWS
+
 ## Object-Oriented Programming (OOP) [🔝](#need-project-ideas-great-heres-how-i-started-out)
 
 * [BookBot](https://github.com/barronbytes/mini-projects/tree/main/bookbot): command-line Python app peforming analysis on text files
@@ -21,9 +25,5 @@ Similarly, we don’t just learn to code for nothing. If something inspired you 
 * [gorest](https://github.com/barronbytes/mini-projects/tree/main/gorest): CRUD operations on public API
 * [flashcards](https://github.com/barronbytes/mini-projects/tree/main/flashcards): practice using `pydantic` and `FastAPI` to build schemas, models, services, and routes
 * [customer-reviews](https://github.com/barronbytes/mini-projects/tree/main/customer-reviews): `OpenAI` integration for sentimental analysis of JSON data
-
-## Cloud [🔝](#need-project-ideas-great-heres-how-i-started-out)
-
-* [Cloud Resume Challenge](https://github.com/barronbytes/mini-projects/tree/main/cloud-resume-challenge): hosting a static portfolio website on AWS
 
 ## Data Science [🔝](#need-project-ideas-great-heres-how-i-started-out)

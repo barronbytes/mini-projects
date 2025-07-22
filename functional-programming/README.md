@@ -11,6 +11,6 @@ Comments on individuals files:
 
 * __check_nba_season_information.py :__ The program applies the concepts of sum types (enums), function transformations, and closures. If decorators had been used, then lines 94 and 95 would have been unnecessary. The program processes end-of-season NBA standings, providing information about team rankings, home court advantage, and playoff opponents.
 
-## Credits & Contributing [🔝](#functional-programming-)
+## Credits & Contributing
 
 Thank you [boot.dev](boot.dev) for providing an online back-end learning platform with integrated project ideas. Contributions are welcome! Feel free to submit a pull request to improve the project or open an issue to report any problems.
