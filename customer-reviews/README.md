@@ -115,7 +115,7 @@ The current project setup requires users to manually download and run it locally
 
 The next step to advance this project would be to develop a frontend component. A web app with features allowing users to upload files and perform CRUD operations would be ideal.
 
-## Results
+## Results [🔝](#sentimental-analysis-with-openai-)
 
 The program analyzed the `zico_coconut_water_reviews.json` file and returned the following:
 * 50 input reviews > bar graph showing 50 labeled sentiments
@@ -123,7 +123,7 @@ The program analyzed the `zico_coconut_water_reviews.json` file and returned the
 
 ![Program created a bar graph on sentimental analysis of coconut beverage reviews.](demo/results.PNG)
 
-## Analysis
+## Analysis [🔝](#sentimental-analysis-with-openai-)
 
 The following questions assume the program analyzed the `zico_coconut_water_reviews.json` file:
 
@@ -149,6 +149,6 @@ The sentiment labels produced by my program are unreliable due to hallucinations
 
 As stated previously, the sentiment analysis program had problems. I wouldn’t trust it to make business decisions. But if its results were reliable,I would tell the company to discontinue its product due to extremely low favorability. They likely have very few core customers. **I would recommend the company take one of two actions:** (1) rebrand and launch a new drink, or (2) stop making its own beverages and use its infrastructure to support more successful competitors as a supply chain manufacturer.
 
-## Credits and Contributing
+## Credits and Contributing [🔝](#sentimental-analysis-with-openai-)
 
 [The Knowledge House](https://www.theknowledgehouse.org/) provided the project requirements and raw data for this project. Contributions are welcome! Feel free to submit a pull request to improve the project or opena  issue to report any problems.
