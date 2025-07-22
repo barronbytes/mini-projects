@@ -1,4 +1,4 @@
-# Static Site Generator
+# Static Site Generator [🏡](https://github.com/barronbytes/mini-projects/tree/main)
 
 I'm excited to showcase a static site generator I built using Python. This tool lets users upload markdown, CSS, and image files, which are then processed and converted into fully styled HTML pages.
 

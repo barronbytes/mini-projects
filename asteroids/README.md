@@ -1,4 +1,4 @@
-# Asteroids
+# Asteroids [🏡](https://github.com/barronbytes/mini-projects/tree/main)
 
 This project is a retro-style Asteroids game built with Python's Pygame. The end result was converted to a browser-compatible format using Pygbag and deployed on GitHub Pages.
 

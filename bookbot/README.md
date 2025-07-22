@@ -1,4 +1,4 @@
-# BookBot: Problem Statement
+# BookBot: Problem Statement [🏡](https://github.com/barronbytes/mini-projects/tree/main)
 
 The bookstore industry lacks an equivalent of the nutritional labels found on grocery items, presenting a lucrative business opportunity. With insight into the frequency of letters in text, parents and educators could optimize book selections for toddlers. Certain letters are easier or harder for young children to pronounce, making this information invaluable. Enter BookBot, a command-line tool designed to fulfill this market need by generating book reports with sorted letter frequency analysis.
 
