@@ -2,8 +2,6 @@
 
 The bookstore industry lacks an equivalent of the nutritional labels found on grocery items, presenting a lucrative business opportunity. With insight into the frequency of letters in text, parents and educators could optimize book selections for toddlers. Certain letters are easier or harder for young children to pronounce, making this information invaluable. Enter BookBot, a command-line tool designed to fulfill this market need by generating book reports with sorted letter frequency analysis.
 
-BookBot is my first [Boot.dev](https://www.boot.dev) project!
-
 ## Getting Started [🔝](#bookbot-problem-statement-)
 
 BookBot performs its analysis in Python. Ensure you have Python version 3.12.3 or greater installed on your Windows, Linux, or macOS system by downloading it from [here](https://www.python.org/downloads/). Download the files mentioned below and maintain the same project structure, with all files in the same folder. Ensure that the project folder contains a subfolder named **'books'** (lowercase), which includes the sample text files for analysis and testing.
